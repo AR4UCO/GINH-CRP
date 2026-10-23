@@ -1,0 +1,2 @@
+source /home/danchhu/hal/espnow/hello_world/build/gdbinit/symbols
+source /home/danchhu/hal/espnow/hello_world/build/gdbinit/connect
