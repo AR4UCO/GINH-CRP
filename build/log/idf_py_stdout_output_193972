@@ -1,168 +1,0 @@
-Command: make -j 18 flash
-[  0%] Built target custom_bundle
-[  0%] Built target partition_table_bin
-[  0%] Built target sections_ld_in_preprocess
-[  0%] Built target _project_elf_src
-[  0%] Built target memory_ld_in_preprocess
-[  1%] [34m[1mPerforming build step for 'bootloader'[0m
-[  3%] Built target __idf_esp_wifi
-[  3%] Built target __idf_esp_coex
-[  0%] Built target bootloader_memory_ld_in_preprocess
-[  1%] Built target _project_elf_src
-[  2%] Built target bootloader_sections_ld_in_preprocess
-[  8%] Built target __idf_log
-[ 15%] Built target __idf_esp_rom
-[ 15%] Built target __idf_wpa_supplicant
-[ 16%] Built target __idf_esp_common
-[ 17%] Built target __idf_esp_netif
-[ 23%] Built target __idf_esp_hw_support
-[ 24%] Built target __idf_esp_system
-[ 28%] Built target __idf_lwip
-[ 25%] Built target __idf_esp_hal_systimer
-[ 29%] Built target __idf_vfs
-[ 31%] Built target __idf_efuse
-[ 30%] Built target __idf_esp_driver_usb_serial_jtag
-[ 46%] Built target __idf_bootloader_support
-[ 30%] Built target __idf_esp_driver_uart
-[ 50%] Built target __idf_esp_security
-[ 31%] Built target __idf_esp_psram
-[ 51%] Built target __idf_esp_hal_security
-[ 31%] Built target __idf_esp_ringbuf
-[ 55%] Built target __idf_esp_hal_ana_conv
-[ 57%] Built target __idf_esp_hal_wdt
-[ 32%] Built target __idf_esp_phy
-[ 59%] Built target __idf_esp_hal_timg
-[ 35%] Built target __idf_nvs_flash
-[ 60%] Built target __idf_micro-ecc
-[ 36%] Built target __idf_nvs_sec_provider
-[ 61%] Built target __idf_esp_bootloader_format
-[ 36%] Built target __idf_esp_event
-[ 62%] Built target __idf_spi_flash
-[ 39%] Built target __idf_cxx
-[ 63%] Built target __idf_esp_hal_mspi
-[ 40%] Built target __idf_pthread
-[ 65%] Built target __idf_esp_hal_clock
-[ 44%] Built target __idf_esp_libc
-[ 69%] Built target __idf_esp_hal_gpspi
-[ 47%] Built target __idf_freertos
-[ 71%] Built target __idf_esp_hal_dma
-[ 74%] Built target __idf_esp_hal_uart
-[ 54%] Built target __idf_esp_hw_support
-[ 76%] Built target __idf_esp_hal_pmu
-[ 55%] Built target __idf_esp_hal_touch_sens
-[ 80%] Built target __idf_esp_hal_usb
-[ 56%] Built target __idf_esp_hal_pmu
-[ 85%] Built target __idf_esp_hal_gpio
-[ 57%] Built target __idf_esp_hal_usb
-[ 89%] Built target __idf_hal
-[ 58%] Built target __idf_esp_hal_gpio
-[ 94%] Built target __idf_soc
-[ 59%] Built target __idf_soc
-[ 96%] Built target __idf_xtensa
-[ 60%] Built target __idf_heap
-[ 97%] Built target __idf_main
-[ 62%] Built target __idf_log
-[ 98%] Built target bootloader.elf
-[ 63%] Built target __idf_hal
-[100%] Built target gen_bootloader_binary
-[ 65%] Built target __idf_esp_rom
-[100%] Built target gen_project_binary
-[ 65%] Built target __idf_esp_common
-Bootloader binary size 0x50b0 bytes. 0x2f50 bytes (37%) free.
-[ 70%] Built target __idf_esp_system
-[100%] Built target bootloader_check_size
-[100%] Built target app
-[ 73%] Built target __idf_spi_flash
-[ 73%] [34m[1mNo install step for 'bootloader'[0m
-[ 75%] Built target __idf_bootloader_support
-[ 75%] [34m[1mCompleted 'bootloader'[0m
-[ 76%] Built target __idf_esp_hal_ana_conv
-[ 77%] Built target bootloader
-[ 77%] Built target __idf_esp_hal_wdt
-[ 77%] Built target everest
-[ 78%] Built target p256-m
-[ 83%] Built target builtin
-[ 83%] Built target pqcp
-[ 84%] Built target extras
-[ 85%] Built target platform
-[ 86%] Built target utilities
-[ 91%] Built target tfpsacrypto
-[ 94%] Built target mbedtls
-[ 95%] Built target mbedx509
-[ 96%] Built target __idf_mbedtls
-[ 97%] Built target __idf_esp_driver_dma
-[ 98%] Built target __idf_esp_mm
-[100%] Built target __idf_esp_pm
-[100%] Built target __idf_esp_hal_uart
-[100%] Built target __idf_esp_driver_gpio
-[100%] Built target __idf_esp_security
-[100%] Built target __idf_esp_timer
-[100%] Built target __idf_esp_hal_systimer
-[100%] Built target __idf_esp_hal_timg
-[100%] Built target __idf_efuse
-[100%] Built target __idf_esp_partition
-[100%] Built target __idf_app_update
-[100%] Built target __idf_esp_bootloader_format
-[100%] Built target __idf_esp_app_format
-[100%] Built target __idf_esp_hal_security
-[100%] Built target __idf_esp_hal_mspi
-[100%] Built target __idf_esp_hal_clock
-[100%] Built target __idf_esp_hal_gpspi
-[100%] Built target __idf_esp_hal_dma
-[100%] Built target __idf_esp_stdio
-[100%] Built target __idf_xtensa
-[100%] Built target __idf_console
-[100%] Built target __idf_main
-[100%] Built target __ldgen_output_sections.ld
-[100%] Built target hello_world.elf
-[100%] Built target gen_hello_world_binary
-[100%] Built target gen_project_binary
-hello_world.bin binary size 0xc60b0 bytes. Smallest app partition is 0x100000 bytes. 0x39f50 bytes (23%) free.
-[100%] Built target app_check_size
-[100%] Built target app
-esptool --chip esp32s3 -p /dev/ttyACM1 -b 460800 --before=default-reset --after=hard-reset write-flash --flash-mode dio --flash-freq 80m --flash-size 16MB 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 hello_world.bin --diff-with bootloader/bootloader_flashed.bin partition_table/partition-table_flashed.bin hello_world_flashed.bin
-esptool v5.6.0
-Serial port /dev/ttyACM1:
-Connecting...
-[1A[2K[1A[2KConnected to ESP32-S3 on /dev/ttyACM1:
-Chip type:          ESP32-S3 (QFN56) (revision v0.2)
-Features:           Wi-Fi, BT 5 (LE), Dual Core + LP Core, 240MHz, Embedded PSRAM 8MB (AP_3v3)
-Crystal frequency:  40MHz
-USB mode:           USB-Serial/JTAG
-MAC:                80:45:6b:36:01:24
-
-Uploading stub flasher...
-Running stub flasher...
-[1A[2K[1A[2KStub flasher running.
-Changing baud rate to 460800...
-Changed.
-
-Configuring flash size...
-
-Writing 'bootloader/bootloader.bin' at 0x00000000...
-SHA digest in image updated.
-SHA digest in image updated.
-No changed sectors found, verifying if data is in flash...
-[1A[2K'bootloader/bootloader.bin' at 0x00000000 verified.
-
-Writing 'partition_table/partition-table.bin' at 0x00008000...
-No changed sectors found, verifying if data is in flash...
-[1A[2K'partition_table/partition-table.bin' at 0x00008000 verified.
-
-Writing 'hello_world.bin' at 0x00010000...
-Changed data sectors found, fast reflashing...
-Reflashing 1 changed sector at 0x00010000...
-Flash will be erased from 0x00010000 to 0x00010fff...
-Compressed 4096 bytes to 1903...
-[2KWriting at 0x00011000 [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m 100.0% 1.86kB/1.86kB [0s] 
-[1A[2K[1A[2KWrote 4096 bytes (1903 compressed) at 0x00010000 in 0.0 seconds (2742.3 kbit/s).
-Reflashing 196 changed sectors at 0x00013000...
-Flash will be erased from 0x00013000 to 0x000d6fff...
-Compressed 802816 bytes to 526489...
-[2KWriting at 0x0001ebc6 [38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m   3.1% 16.00kB/514.15kB [0s] [2KWriting at 0x00025fb4 [38;2;249;38;114m━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m   6.2% 32.00kB/514.15kB [0s] [2KWriting at 0x00030ec1 [38;2;249;38;114m━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m   9.3% 48.00kB/514.15kB [0s] [2KWriting at 0x00036e8c [38;2;249;38;114m━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m  12.4% 64.00kB/514.15kB [0s] [2KWriting at 0x0003cff5 [38;2;249;38;114m━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━[0m  15.6% 80.00kB/514.15kB [0s] [2KWriting at 0x00042fd2 [38;2;249;38;114m━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━[0m  18.7% 96.00kB/514.15kB [0s] [2KWriting at 0x000491d4 [38;2;249;38;114m━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━[0m  21.8% 112.00kB/514.15kB [0s] [2KWriting at 0x0004ea3b [38;2;249;38;114m━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━[0m  24.9% 128.00kB/514.15kB [0s] [2KWriting at 0x0005405a [38;2;249;38;114m━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━[0m  28.0% 144.00kB/514.15kB [1s] [2KWriting at 0x0005951e [38;2;249;38;114m━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━[0m  31.1% 160.00kB/514.15kB [1s] [2KWriting at 0x0005eef6 [38;2;249;38;114m━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━[0m  34.2% 176.00kB/514.15kB [1s] [2KWriting at 0x00064624 [38;2;249;38;114m━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━[0m  37.3% 192.00kB/514.15kB [1s] [2KWriting at 0x0006983d [38;2;249;38;114m━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━[0m  40.5% 208.00kB/514.15kB [1s] [2KWriting at 0x0006e988 [38;2;249;38;114m━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━[0m  43.6% 224.00kB/514.15kB [1s] [2KWriting at 0x000739e9 [38;2;249;38;114m━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━[0m  46.7% 240.00kB/514.15kB [1s] [2KWriting at 0x0007932a [38;2;249;38;114m━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━[0m  49.8% 256.00kB/514.15kB [1s] [2KWriting at 0x0007e98e [38;2;249;38;114m━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━[0m  52.9% 272.00kB/514.15kB [1s] [2KWriting at 0x00084022 [38;2;249;38;114m━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━[0m  56.0% 288.00kB/514.15kB [1s] [2KWriting at 0x00089526 [38;2;249;38;114m━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━[0m  59.1% 304.00kB/514.15kB [1s] [2KWriting at 0x0008f552 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━[0m  62.2% 320.00kB/514.15kB [2s] [2KWriting at 0x00094d76 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━[0m  65.4% 336.00kB/514.15kB [2s] [2KWriting at 0x0009a906 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━[0m  68.5% 352.00kB/514.15kB [2s] [2KWriting at 0x000a051b [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━[0m  71.6% 368.00kB/514.15kB [2s] [2KWriting at 0x000a60fb [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━[0m  74.7% 384.00kB/514.15kB [2s] [2KWriting at 0x000abefe [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━[0m  77.8% 400.00kB/514.15kB [2s] [2KWriting at 0x000b1703 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━[0m  80.9% 416.00kB/514.15kB [2s] [2KWriting at 0x000b71f6 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━[0m  84.0% 432.00kB/514.15kB [2s] [2KWriting at 0x000bd1b8 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━[0m  87.1% 448.00kB/514.15kB [2s] [2KWriting at 0x000c3a12 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━[0m  90.2% 464.00kB/514.15kB [2s] [2KWriting at 0x000ca13b [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━[0m  93.4% 480.00kB/514.15kB [2s] [2KWriting at 0x000cf9c3 [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━[0m  96.5% 496.00kB/514.15kB [2s] [2KWriting at 0x000d4f9d [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m  99.6% 512.00kB/514.15kB [2s] [2KWriting at 0x000d7000 [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m 100.0% 514.15kB/514.15kB [2s] 
-[1A[2K[1A[2KWrote 802816 bytes (526489 compressed) at 0x00013000 in 3.0 seconds (2157.8 kbit/s).
-Verifying written data...
-[1A[2KHash of data verified.
-
-Hard resetting via RTS pin...
-Built target flash
