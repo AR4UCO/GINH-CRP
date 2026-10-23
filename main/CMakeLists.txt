@@ -1,3 +1,5 @@
-idf_component_register(SRCS "hello_world_main.c"
-                       PRIV_REQUIRES spi_flash esp_wifi esp_event nvs_flash
-                       INCLUDE_DIRS "")
+idf_component_register(
+    SRCS "main.c" "display.c" "buttons.c"
+    INCLUDE_DIRS "."
+    PRIV_REQUIRES esp_lcd esp_driver_spi esp_driver_i2s esp_driver_gpio
+)
