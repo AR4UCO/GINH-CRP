@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 
 #include "freertos/FreeRTOS.h"
@@ -266,19 +267,19 @@ void display_line(int x0, int x1, int y0, int y1){
     int error = dx + dy;
 
     for(;;){
-        display_set_pixel(x0, y0, true)
-        int e2 = 2 * error
+        display_set_pixel(x0, y0, true);
+        int e2 = 2 * error;
         if (e2 >= dy){
-            if (x0 == x1) 
+            if (x0 == x1)
                 break;
-            error += dy
-            x0 += sx
+            error += dy;
+            x0 += sx;
         }
         if (e2 <= dx){
-            if (y0 == y1) 
+            if (y0 == y1)
                 break;
-            error += dx
-            y0 += sy
+            error += dx;
+            y0 += sy;
         }
     }
 }

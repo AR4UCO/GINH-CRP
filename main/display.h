@@ -16,4 +16,6 @@ void display_draw_rect(int x, int y, int w, int h);
 
 void display_text(int x, int y, const char *str, bool invert);
 
+void display_line(int x0, int x1, int y0, int y1);
+
 esp_err_t display_flush(void);
