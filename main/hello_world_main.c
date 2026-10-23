@@ -124,7 +124,7 @@ void app_main(void)
 
     xTaskCreate(rx_worker, "e2ee_rx", 4096, NULL, 5, NULL);
 
-    // Consola interactiva: send / sendto / peers / hello / whoami
+    // Consola interactiva: send / sendto / peers / nick / hello / whoami
     cli_start();
 
     // Anuncio inicial: 5 HELLO por broadcast (1 por segundo)

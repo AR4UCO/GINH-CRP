@@ -2,10 +2,11 @@
  * Consola interactiva para el mensajero E2EE.
  *
  *   send <texto>             envía cifrado a todos los peers (1 unicast c/u)
- *   sendto <índice|MAC> <texto>  envía a un peer concreto (ver 'peers')
+ *   sendto <índice|MAC|nick> <texto>  envía a un peer concreto
  *   peers                   lista sesiones seguras y huellas
+ *   nick [nuevo]            muestra o cambia tu nick (persistente en NVS)
  *   hello                   re-anuncia por broadcast para descubrir placas
- *   whoami                  muestra nombre/MAC propios
+ *   whoami                  muestra nick/MAC propios
  */
 
 #include <stdio.h>
@@ -125,9 +126,25 @@ static int cmd_sendto(int argc, char **argv)
     {
         char *end = NULL;
         long idx = strtol(argv[1], &end, 10);
-        if (end == argv[1] || *end != '\0' || idx < 0 || !e2ee_get_peer_info((int)idx, &p))
+        bool por_indice = (end != argv[1] && *end == '\0');
+
+        if (por_indice)
         {
-            printf("Peer '%s' no válido. Usa 'peers' (índice) o aa:bb:cc:dd:ee:ff.\n", argv[1]);
+            if (idx < 0 || !e2ee_get_peer_info((int)idx, &p))
+            {
+                printf("No existe el peer %d. Usa 'peers'.\n", (int)idx);
+                return 1;
+            }
+        }
+        else if (e2ee_find_peer_by_name(argv[1], mac))
+        {
+            memcpy(p.mac, mac, 6);
+            if (!e2ee_lookup_name(mac, p.name, sizeof(p.name)))
+                snprintf(p.name, sizeof(p.name), "%s", argv[1]);
+        }
+        else
+        {
+            printf("Peer '%s' no encontrado. Usa 'peers' (índice, MAC o nick).\n", argv[1]);
             return 1;
         }
     }
@@ -162,14 +179,14 @@ static int cmd_peers(int argc, char **argv)
         return 0;
     }
 
-    printf("%-3s %-9s %-17s %-17s\n", "#", "Nombre", "MAC", "Huella");
+    printf("%-3s %-16s %-17s %-17s\n", "#", "Nick", "MAC", "Huella");
     for (int i = 0; i < n; i++)
     {
-        e2ee_peer_info_t p;
+        e2ee_peer_info_t p = {0};
         if (!e2ee_get_peer_info(i, &p))
             continue;
         const uint8_t *f = p.fingerprint;
-        printf("%-3d %-9s " MACSTR " %02X%02X%02X%02X-%02X%02X%02X%02X\n",
+        printf("%-3d %-16s " MACSTR " %02X%02X%02X%02X-%02X%02X%02X%02X\n",
                i, p.name, MAC2STR(p.mac),
                f[0], f[1], f[2], f[3], f[4], f[5], f[6], f[7]);
     }
@@ -198,10 +215,39 @@ static int cmd_whoami(int argc, char **argv)
     (void)argv;
 
     uint8_t mac[6];
-    char name[16];
+    char name[E2EE_NICK_MAX + 1];
     e2ee_get_self(mac, name, sizeof(name));
     printf("%s (" MACSTR ") - %d peer(s) seguro(s)\n",
            name, MAC2STR(mac), e2ee_established_count());
+    return 0;
+}
+
+static int cmd_nick(int argc, char **argv)
+{
+    if (argc == 1)
+    {
+        uint8_t mac[6];
+        char name[E2EE_NICK_MAX + 1];
+        e2ee_get_self(mac, name, sizeof(name));
+        printf("Nick actual: %s (MAC " MACSTR ")\n", name, MAC2STR(mac));
+        return 0;
+    }
+
+    char nick[E2EE_NICK_MAX + 1];
+    size_t len = join_text(argc, argv, 1, nick, sizeof(nick));
+    if (len == 0 || len == (size_t)-1)
+    {
+        printf("Nick inválido: 1 a %d caracteres ASCII imprimibles.\n", E2EE_NICK_MAX);
+        return 1;
+    }
+
+    esp_err_t err = e2ee_set_nick(nick);
+    if (err != ESP_OK)
+    {
+        printf("Error: %s\n", esp_err_to_name(err));
+        return 1;
+    }
+    printf("Nick guardado en NVS y anunciado: %s\n", nick);
     return 0;
 }
 
@@ -233,7 +279,8 @@ void cli_start(void)
         {.command = "sendto", .help = "Envía un mensaje cifrado a un peer concreto", .hint = "<índice|MAC> <texto>", .func = cmd_sendto},
         {.command = "peers", .help = "Lista las sesiones seguras y sus huellas", .func = cmd_peers},
         {.command = "hello", .help = "Re-anuncia por broadcast para descubrir placas", .func = cmd_hello},
-        {.command = "whoami", .help = "Muestra mi nombre y MAC", .func = cmd_whoami},
+        {.command = "whoami", .help = "Muestra mi nick y MAC", .func = cmd_whoami},
+        {.command = "nick", .help = "Muestra o cambia tu nick (persistente, no depende de la MAC)", .hint = "[nuevo nick]", .func = cmd_nick},
         {.command = "free", .help = "Muestra RAM libre (heap interno/PSRAM)", .func = cmd_free},
     };
     for (size_t i = 0; i < sizeof(cmds) / sizeof(cmds[0]); i++)

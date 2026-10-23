@@ -1,24 +1,28 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include "e2ee.h"
 #include "esp_log.h"
 #include "esp_now.h"
 #include "esp_mac.h"
 #include "esp_random.h"
+#include "nvs.h"
 #include "psa/crypto.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 
 static const char *TAG = "E2EE";
 
-#define E2E_VERSION 0x01
+#define E2E_VERSION 0x02 // v2: nick de 15 caracteres en HELLO
 #define PKT_HELLO 0x01
 #define PKT_DATA 0x02
 
 #define X25519_PUB_LEN 32
 #define BOOT_NONCE_LEN 8
-#define NAME_LEN 8
+#define NAME_LEN (E2EE_NICK_MAX + 1) // campo fijo en el cable: 16 bytes
+#define NVS_NAMESPACE "e2ee"
+#define NVS_KEY_NICK "nick"
 #define KEY_LEN 32
 #define SALT_LEN 4
 #define NONCE_LEN 12
@@ -265,6 +269,78 @@ static void log_fingerprint(const uint8_t mac_peer[6], const uint8_t fp[8])
 
 // ---------- API pública ----------
 
+/* Carga el nick de NVS. Si no hay, se conserva el default "ESP-XXXX". */
+static void nick_load(void)
+{
+    nvs_handle_t h;
+    if (nvs_open(NVS_NAMESPACE, NVS_READONLY, &h) != ESP_OK)
+        return;
+
+    char tmp[E2EE_NICK_MAX + 1] = {0};
+    size_t len = sizeof(tmp);
+    esp_err_t err = nvs_get_str(h, NVS_KEY_NICK, tmp, &len);
+    nvs_close(h);
+
+    if (err == ESP_OK && tmp[0] != '\0')
+    {
+        snprintf(s_our_name, sizeof(s_our_name), "%.*s", E2EE_NICK_MAX, tmp);
+        ESP_LOGI(TAG, "Nick cargado de NVS: %s", s_our_name);
+    }
+}
+
+esp_err_t e2ee_set_nick(const char *nick)
+{
+    if (!nick)
+        return ESP_ERR_INVALID_ARG;
+
+    size_t len = strlen(nick);
+    if (len == 0 || len > E2EE_NICK_MAX)
+        return ESP_ERR_INVALID_SIZE;
+    for (size_t i = 0; i < len; i++)
+    {
+        if (nick[i] < 0x20 || nick[i] > 0x7E)
+            return ESP_ERR_INVALID_ARG;
+    }
+
+    xSemaphoreTake(s_lock, portMAX_DELAY);
+    snprintf(s_our_name, sizeof(s_our_name), "%.*s", E2EE_NICK_MAX, nick);
+    xSemaphoreGive(s_lock);
+
+    // Persistir en NVS (sobrevive reinicios y no depende de la MAC)
+    nvs_handle_t h;
+    esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READWRITE, &h);
+    if (err == ESP_OK)
+    {
+        err = nvs_set_str(h, NVS_KEY_NICK, nick);
+        if (err == ESP_OK)
+            err = nvs_commit(h);
+        nvs_close(h);
+    }
+    if (err != ESP_OK)
+        ESP_LOGW(TAG, "No se pudo guardar el nick en NVS (%s)", esp_err_to_name(err));
+
+    // Re-anunciar el nick: broadcast + unicast a cada sesión.
+    // Los peers con la misma pub+nonce solo actualizan el nombre; no re-negocian.
+    static const uint8_t bcast[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+    e2ee_send_hello(bcast);
+
+    uint8_t macs[MAX_PEERS][6];
+    int n = 0;
+    xSemaphoreTake(s_lock, portMAX_DELAY);
+    for (int i = 0; i < MAX_PEERS; i++)
+    {
+        if (s_peers[i].used && s_peers[i].key != 0)
+            memcpy(macs[n++], s_peers[i].mac, 6);
+    }
+    xSemaphoreGive(s_lock);
+
+    for (int i = 0; i < n; i++)
+        e2ee_send_hello(macs[i]);
+
+    ESP_LOGI(TAG, "Nick establecido: %s", nick);
+    return ESP_OK;
+}
+
 esp_err_t e2ee_init(void)
 {
     psa_status_t st = psa_crypto_init();
@@ -275,7 +351,9 @@ esp_err_t e2ee_init(void)
     }
 
     esp_read_mac(s_our_mac, ESP_MAC_WIFI_STA);
+    // Default solo si el usuario nunca configuró un nick
     snprintf(s_our_name, sizeof(s_our_name), "ESP-%02X%02X", s_our_mac[4], s_our_mac[5]);
+    nick_load();
     esp_fill_random(s_our_nonce, sizeof(s_our_nonce));
 
     s_lock = xSemaphoreCreateMutex();
@@ -309,12 +387,12 @@ void e2ee_set_rx_callback(e2ee_rx_cb_t cb)
 
 esp_err_t e2ee_send_hello(const uint8_t mac[6])
 {
-    uint8_t pkt[HELLO_PKT_LEN];
+    uint8_t pkt[HELLO_PKT_LEN] = {0};
     pkt[0] = E2E_VERSION;
     pkt[1] = PKT_HELLO;
     memcpy(pkt + 2, s_our_pub, X25519_PUB_LEN);
     memcpy(pkt + 34, s_our_nonce, BOOT_NONCE_LEN);
-    memcpy(pkt + 42, s_our_name, NAME_LEN); // cabe: "ESP-XXXX\0" = 8
+    memcpy(pkt + 42, s_our_name, strnlen(s_our_name, NAME_LEN - 1)); // resto en cero
 
     if (!is_broadcast(mac))
         add_espnow_peer(mac);
@@ -417,7 +495,7 @@ bool e2ee_get_peer_info(int idx, e2ee_peer_info_t *out)
             continue;
         memset(out, 0, sizeof(*out));
         memcpy(out->mac, s->mac, 6);
-        snprintf(out->name, sizeof(out->name), "%s", s->name);
+        snprintf(out->name, sizeof(out->name), "%.*s", E2EE_NICK_MAX, s->name);
         memcpy(out->fingerprint, s->fp, sizeof(out->fingerprint));
         out->tx_seq = s->tx_seq;
         out->rx_seq = s->rx_seq;
@@ -452,6 +530,28 @@ bool e2ee_lookup_name(const uint8_t mac[6], char *name, size_t name_len)
     return ok;
 }
 
+bool e2ee_find_peer_by_name(const char *name, uint8_t mac[6])
+{
+    if (!name || !mac)
+        return false;
+    bool ok = false;
+    xSemaphoreTake(s_lock, portMAX_DELAY);
+    for (int i = 0; i < MAX_PEERS; i++)
+    {
+        session_t *s = &s_peers[i];
+        if (!s->used || s->key == 0)
+            continue;
+        if (strcasecmp(s->name, name) == 0)
+        {
+            memcpy(mac, s->mac, 6);
+            ok = true;
+            break;
+        }
+    }
+    xSemaphoreGive(s_lock);
+    return ok;
+}
+
 // ---------- recepción ----------
 
 static void handle_hello(const uint8_t mac[6], const uint8_t *body, int len)
@@ -476,6 +576,13 @@ static void handle_hello(const uint8_t mac[6], const uint8_t *body, int len)
         memcmp(s->peer_pub, peer_pub, X25519_PUB_LEN) == 0 &&
         memcmp(s->peer_nonce, peer_nonce, BOOT_NONCE_LEN) == 0)
     {
+        // Misma sesión: solo puede haber cambiado el nick (sin re-negociar)
+        if (strncmp(s->name, peer_name, NAME_LEN) != 0)
+        {
+            memcpy(s->name, peer_name, NAME_LEN);
+            s->name[NAME_LEN] = '\0';
+            ESP_LOGI(TAG, "Nick actualizado de " MACSTR ": %s", MAC2STR(mac), s->name);
+        }
         xSemaphoreGive(s_lock);
         return;
     }

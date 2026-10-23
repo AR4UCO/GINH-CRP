@@ -21,8 +21,8 @@ grabada en el firmware.
 ## Formato de paquetes (capa de aplicación sobre ESP-NOW)
 
 ```
-HELLO:  [ver=1][tipo=1][pub X25519:32][boot_nonce:8][nombre:8]   (sin cifrar)
-DATA:   [ver=1][tipo=2][nonce:12][AES-256-GCM(seq:8 || payload)][tag:16]
+HELLO:  [ver=2][tipo=1][pub X25519:32][boot_nonce:8][nick:16]   (sin cifrar)
+DATA:   [ver=2][tipo=2][nonce:12][AES-256-GCM(seq:8 || payload)][tag:16]
         nonce = salt_sesión:4 || seq:8  (bit de dirección en el salt)
 ```
 
@@ -67,11 +67,33 @@ Cada placa tiene un prompt `e2ee>`. Comandos:
 | Comando | Acción |
 |---|---|
 | `send <texto>` | Cifra y envía a **todos** los peers (un unicast por peer) |
-| `sendto <índice\|MAC> <texto>` | Envía a un peer concreto (índice de `peers` o MAC) |
-| `peers` | Lista peers: nombre, MAC y huella |
+| `sendto <índice\|MAC\|nick> <texto>` | Envía a un peer concreto |
+| `peers` | Lista peers: nick, MAC y huella |
+| `nick [nuevo]` | Muestra o cambia tu nick (se guarda en NVS) |
 | `hello` | Re-anuncia por broadcast (fuerza descubrimiento) |
-| `whoami` | Muestra nombre y MAC propios |
+| `whoami` | Muestra nick y MAC propios |
+| `free` | Muestra RAM libre |
 | `help` | Ayuda |
+
+### Nick / identidad
+
+El nick es una etiqueta elegida por el usuario, **independiente de la MAC**:
+se guarda en NVS (sobrevive reinicios) y viaja en cada HELLO. Cambiarlo
+re-anuncia el HELLO; los peers actualizan el nombre sin re-negociar claves.
+
+```
+e2ee> nick Ana
+Nick guardado en NVS y anunciado: Ana
+
+e2ee> sendto Beto hola
+-> Beto (48:ca:43:aa:bb:cc): hola
+```
+
+En la otra placa aparece `Nick actualizado de 24:ec:4a:...: Ana`.
+
+> Es un nombre, **no** una identidad criptográfica: cualquiera puede usar el
+> mismo nick. La autenticación de la sesión sigue siendo TOFU por MAC/clave.
+> El formato HELLO cambió (protocolo v2): **reflashear ambas placas**.
 
 Ejemplo de conversación entre las dos placas:
 
@@ -85,6 +107,25 @@ I (xxx) ESP-NOW-E2EE: MSG de ESP-4A1B: hola desde la placa A
 
 Los HELLO periódicos son silenciosos cuando ya hay sesión: solo se ven
 mensajes, huellas y errores de autenticación/replay.
+
+## Integración con la UI (pantalla)
+
+La capa E2EE es **headless**: no sabe nada de pantalla ni de consola. Para la
+interfaz visual, lo que hay que consumir es:
+
+| Necesidad | API |
+|---|---|
+| Último mensaje recibido | callback `e2ee_set_rx_callback()` (corre en la tarea cripto: **encolar**, no dibujar) |
+| Lista de peers | `e2ee_get_peer_info(i, &p)` → `name`, `mac`, `fingerprint` |
+| Cantidad de sesiones | `e2ee_established_count()` |
+| Mi nick/MAC | `e2ee_get_self()` |
+| Enviar | `e2ee_send(mac, texto, len)` |
+| Cambiar nick | `e2ee_set_nick()` |
+| Descubrir | `e2ee_send_hello(BROADCAST)` |
+
+Regla de oro: **no llamar a LVGL/driver de pantalla desde el callback de
+recepción** (corre en la tarea cripto). Encolar el mensaje y dibujarlo desde
+la tarea de UI, como ya hace la consola con `ESP_LOGI`.
 
 ## Límites (diseño de laboratorio)
 
@@ -100,5 +141,5 @@ mensajes, huellas y errores de autenticación/replay.
 | Archivo | Contenido |
 |---|---|
 | `main/e2ee.c` / `e2ee.h` | Protocolo: handshake X25519, KDF, AES-GCM, tabla de sesiones |
-| `main/cli.c` / `cli.h` | Consola interactiva: `send`, `sendto`, `peers`, `hello`, `whoami` |
+| `main/cli.c` / `cli.h` | Consola interactiva: `send`, `sendto`, `peers`, `nick`, `hello`, `whoami` |
 | `main/hello_world_main.c` | App: WiFi/ESP-NOW, cola RX + tarea cripto, re-anuncio periódico |
