@@ -11,6 +11,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "esp_wifi.h"
 #include "esp_now.h"
@@ -23,6 +24,9 @@
 #include "freertos/queue.h"
 #include "e2ee.h"
 #include "cli.h"
+#include "display.h"
+#include "buttons.h"
+#include "teclado.h"
 
 static const char *TAG = "ESP-NOW-E2EE";
 
@@ -79,6 +83,65 @@ static void on_secure_data(const uint8_t mac[6], const uint8_t *payload, size_t 
     ESP_LOGI(TAG, "MSG de %s: %.*s", name, (int)len, payload);
 }
 
+// ---------- Teclado radial -> backend cifrado ----------
+// readline() bloquea dibujando el teclado hasta Enter (KEY4).
+// Al volver, el texto se cifra y se manda a todos los peers con sesión.
+static void teclado_task(void *arg)
+{
+    (void)arg;
+
+    for (;;)
+    {
+        char *msg = readline();
+        if (!msg)
+        {
+            vTaskDelay(pdMS_TO_TICKS(100));
+            continue;
+        }
+
+        size_t len = strlen(msg);
+        if (len == 0)
+        {
+            free(msg);
+            continue;
+        }
+        if (len > E2EE_MAX_PAYLOAD)
+            len = E2EE_MAX_PAYLOAD;
+
+        int enviados = 0;
+        if (len > 0)
+        {
+            int n = e2ee_established_count();
+            for (int i = 0; i < n; i++)
+            {
+                e2ee_peer_info_t p;
+                if (e2ee_get_peer_info(i, &p) &&
+                    e2ee_send(p.mac, (const uint8_t *)msg, len) == ESP_OK)
+                    enviados++;
+            }
+            ESP_LOGI(TAG, "Teclado: \"%.*s\" -> %d peer(s)", (int)len, msg, enviados);
+        }
+
+        // Feedback breve antes de volver al teclado
+        display_clear();
+        if (enviados > 0)
+        {
+            char line[32];
+            snprintf(line, sizeof(line), "Enviado a %d", enviados);
+            display_text(0, 0, line, false);
+        }
+        else
+        {
+            display_text(0, 0, "Sin sesion", false);
+            display_text(0, 10, "segura", false);
+        }
+        display_flush();
+        vTaskDelay(pdMS_TO_TICKS(700));
+
+        free(msg);
+    }
+}
+
 // ---------- Inicializar WiFi + ESP-NOW ----------
 static void init_espnow(void)
 {
@@ -123,6 +186,12 @@ void app_main(void)
     e2ee_set_rx_callback(on_secure_data);
 
     xTaskCreate(rx_worker, "e2ee_rx", 4096, NULL, 5, NULL);
+
+    // Teclado radial en la pantalla (si el hardware responde)
+    if (display_init() == ESP_OK && buttons_init() == ESP_OK)
+        xTaskCreate(teclado_task, "teclado", 4096, NULL, 3, NULL);
+    else
+        ESP_LOGW(TAG, "Display/botones no disponibles; solo consola");
 
     // Consola interactiva: send / sendto / peers / nick / hello / whoami
     cli_start();
