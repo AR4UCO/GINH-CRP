@@ -1,13 +1,9 @@
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "esp_log.h"
-#include "esp_random.h"
-#include "esp_timer.h"
 
 #include "board.h"
 #include "buttons.h"
@@ -18,9 +14,11 @@ char caps[] =    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char symb[] =    "!\"#$%&'()*+,-./:;<=>?@[]\\^_`{|}~";
 char numb[] =    "0123456789";
 
-#define SIDEBAR_WIDTH       26
-#define KEYBOARD_WIDTH      (BOARD_LCD_WIDTH - SIDEBAR_WIDTH)
-#define CHARS_SHOWN   7
+#define SIDEBAR_WIDTH  26
+#define KEYBOARD_WIDTH (BOARD_LCD_WIDTH - SIDEBAR_WIDTH)
+#define QUARTER_WIDTH  (KEYBOARD_WIDTH / 2)
+#define QUARTER_HEIGHT (BOARD_LCD_HEIGHT / 2)
+#define CHARS_SHOWN    7
 
 char read_char(void);
 
@@ -28,47 +26,31 @@ static char *charsets[] = {letters, caps, symb, numb};
 static int current_charset_id;
 static char *res;
 
+static int min(int a, int b){
+    return a > b ? b : a;
+}
+
 static void draw_text_buf(int x, int y, const char *s, int n, bool invert)
 {
-    char buf[32];
-    if (n > (int)sizeof(buf) - 1) {
-        n = (int)sizeof(buf) - 1;
-    }
+    char buf[QUARTER_WIDTH / DISPLAY_FONT_W + 1];
     memcpy(buf, s, n);
     buf[n] = '\0';
     display_text(x, y, buf, invert);
 }
 
-static void draw_chunk(int dir, const char *s, int n)
+static void draw_quadrant(int quadrant, const char *s, int n)
 {
     if (n <= 0) {
         return;
     }
 
-    switch (dir) {
-    case 0: { // up
-        const int w = n * DISPLAY_FONT_W;
-        draw_text_buf((KEYBOARD_WIDTH - w) / 2, 1, s, n, false);
-        break;
-    }
-    case 2: { // down
-        const int w = n * DISPLAY_FONT_W;
-        draw_text_buf((KEYBOARD_WIDTH - w) / 2, BOARD_LCD_HEIGHT - DISPLAY_FONT_H - 1, s, n, false);
-        break;
-    }
-    default: { // left (3) / right (1), stacked in a small grid
-        const int cols = n > 4 ? 4 : n;
-        const int rows = (n + cols - 1) / cols;
-        const int w = cols * DISPLAY_FONT_W;
-        const int h = rows * DISPLAY_FONT_H;
-        const int x = dir == 1 ? KEYBOARD_WIDTH - w - 2 : 2;
-        const int y = (BOARD_LCD_HEIGHT - h) / 2;
-        for (int i = 0; i < n; i++) {
-            draw_text_buf(x + (i % cols) * DISPLAY_FONT_W, y + (i / cols) * DISPLAY_FONT_H, &s[i], 1, false);
-        }
-        break;
-    }
-    }
+    const int right = quadrant == 1 || quadrant == 2;
+    const int bottom = quadrant >= 2;
+    const int x = right ? QUARTER_WIDTH : 0;
+    const int y = bottom ? QUARTER_HEIGHT : 0;
+    const int w = n * DISPLAY_FONT_W;
+
+    draw_text_buf(x + (QUARTER_WIDTH - w) / 2, y + (QUARTER_HEIGHT - DISPLAY_FONT_H) / 2, s, n, false);
 }
 
 static int quarter_offset(int range, int i)
@@ -87,13 +69,12 @@ static void draw_screen(const char *charset, int lo, int hi)
 {
     display_clear();
 
-    //separadores
-    display_fill_rect(0, BOARD_LCD_HEIGHT/2, KEYBOARD_WIDTH, 1);
-    display_fill_rect(KEYBOARD_WIDTH/2, 0, 1, BOARD_LCD_HEIGHT);
-    display_fill_rect(KEYBOARD_WIDTH, 0, 1, BOARD_LCD_HEIGHT);
+    display_fill_rect(0, QUARTER_HEIGHT, KEYBOARD_WIDTH, 1, true);
+    display_fill_rect(QUARTER_WIDTH, 0, 1, BOARD_LCD_HEIGHT, true);
+    display_fill_rect(KEYBOARD_WIDTH, 0, 1, BOARD_LCD_HEIGHT, true);
 
-    const int line_len = res == NULL ? 0 : (int)strlen(res);
-    const int shown = line_len < CHARS_SHOWN ? line_len : CHARS_SHOWN;
+    const int line_len = (int)strlen(res);
+    const int shown = min(line_len, CHARS_SHOWN);
     const int first = line_len - shown;
     for (int i = 0; i < shown; i++) {
         char c = res[first + i];
@@ -107,9 +88,9 @@ static void draw_screen(const char *charset, int lo, int hi)
     if (range == 1) {
         draw_text_buf((KEYBOARD_WIDTH - DISPLAY_FONT_W) / 2, (BOARD_LCD_HEIGHT - DISPLAY_FONT_H) / 2, &charset[lo], 1, true);
     } else {
-        const int nonempty_quarters = min(range,4);
-        for (int i = 0; i < nonempty_quarters; i++) {
-            draw_chunk(i, &charset[lo + quarter_offset(range, i)], quarter_size_at(range, i));
+        const int quadrants = min(4, range);
+        for (int i = 0; i < quadrants; i++) {
+            draw_quadrant(i, &charset[lo + quarter_offset(range, i)], quarter_size_at(range, i));
         }
     }
 
@@ -203,12 +184,12 @@ char read_char(void){
             return charset[lo];
         }
 
-        const int nonempty_quarters = min(range, 4);
-        const int selected_dir = joystick_dir_pressed(new_press);
+        const int quadrants = min(4,range);
+        const int selected = joystick_dir_pressed(new_press);
 
-        if (selected_dir >= 0 && selected_dir < nonempty_quarters) {
-            lo = lo + quarter_offset(range, selected_dir);
-            hi = lo + quarter_size_at(range, selected_dir) - 1;
+        if (selected >= 0 && selected < quadrants) {
+            lo = lo + quarter_offset(range, selected);
+            hi = lo + quarter_size_at(range, selected) - 1;
             continue;
         }
 
