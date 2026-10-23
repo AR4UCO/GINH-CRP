@@ -71,17 +71,26 @@ static void draw_chunk(int dir, const char *s, int n)
     }
 }
 
+static int quarter_offset(int range, int i)
+{
+    const int base = range / 4;
+    const int extra = range % 4;
+    return i * base + (i < extra ? i : extra);
+}
+
+static int quarter_size_at(int range, int i)
+{
+    return range / 4 + (i < range % 4 ? 1 : 0);
+}
+
 static void draw_screen(const char *charset, int lo, int hi)
 {
     display_clear();
 
-    //diagonales
-    display_line(0, KEYBOARD_WIDTH - 1, 0, BOARD_LCD_HEIGHT - 1);
-    display_line(0, KEYBOARD_WIDTH - 1, BOARD_LCD_HEIGHT - 1, 0);
-    //separador
-    for (int y = 0; y < BOARD_LCD_HEIGHT; y++) {
-        display_set_pixel(KEYBOARD_WIDTH, y, true);
-    }
+    //separadores
+    display_fill_rect(0, BOARD_LCD_HEIGHT/2, KEYBOARD_WIDTH, 1);
+    display_fill_rect(KEYBOARD_WIDTH/2, 0, 1, BOARD_LCD_HEIGHT);
+    display_fill_rect(KEYBOARD_WIDTH, 0, 1, BOARD_LCD_HEIGHT);
 
     const int line_len = res == NULL ? 0 : (int)strlen(res);
     const int shown = line_len < CHARS_SHOWN ? line_len : CHARS_SHOWN;
@@ -94,19 +103,13 @@ static void draw_screen(const char *charset, int lo, int hi)
         draw_text_buf(KEYBOARD_WIDTH + (SIDEBAR_WIDTH - DISPLAY_FONT_W) / 2, 4 + i * DISPLAY_FONT_H, &c, 1, false);
     }
 
-    const int len = hi - lo + 1;
-    if (len == 1) {
+    const int range = hi - lo + 1;
+    if (range == 1) {
         draw_text_buf((KEYBOARD_WIDTH - DISPLAY_FONT_W) / 2, (BOARD_LCD_HEIGHT - DISPLAY_FONT_H) / 2, &charset[lo], 1, true);
     } else {
-        const int q = (len + 3) / 4;
-        const int chunks = (len + q - 1) / q;
-        for (int i = 0; i < chunks; i++) {
-            const int start = lo + i * q;
-            int n = hi - start + 1;
-            if (n > q) {
-                n = q;
-            }
-            draw_chunk(i, &charset[start], n);
+        const int nonempty_quarters = min(range,4);
+        for (int i = 0; i < nonempty_quarters; i++) {
+            draw_chunk(i, &charset[lo + quarter_offset(range, i)], quarter_size_at(range, i));
         }
     }
 
@@ -148,7 +151,7 @@ char* readline(){
     return res;
 }
 
-static int quarter_for_press(uint32_t new_press)
+static int joystick_dir_pressed(uint32_t new_press)
 {
     if (new_press & (1u << BTN_UP)) {
         return 0;
@@ -193,25 +196,19 @@ char read_char(void){
             return '\n';
         }
 
-        const int len = hi - lo + 1;
-        if (len == 1) {
+        const int range = hi - lo + 1;
+        if (range == 1) {
             draw_screen(charset, lo, hi);
             vTaskDelay(pdMS_TO_TICKS(200));
             return charset[lo];
         }
 
-        const int quarter_size = (len + 3) / 4;
-        const int chunks = (len + quarter_size - 1) / quarter_size;
-        const int sel = quarter_for_press(new_press);
+        const int nonempty_quarters = min(range, 4);
+        const int selected_dir = joystick_dir_pressed(new_press);
 
-        if (sel >= 0 && sel < chunks) {
-            const int new_lo = lo + sel * quarter_size;
-            int new_hi = new_lo + quarter_size - 1;
-            if (new_hi > hi) {
-                new_hi = hi;
-            }
-            lo = new_lo;
-            hi = new_hi;
+        if (selected_dir >= 0 && selected_dir < nonempty_quarters) {
+            lo = lo + quarter_offset(range, selected_dir);
+            hi = lo + quarter_size_at(range, selected_dir) - 1;
             continue;
         }
 
