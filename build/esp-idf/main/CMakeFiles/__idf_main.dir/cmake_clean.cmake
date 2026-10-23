@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/__idf_main.dir/e2ee.c.obj"
+  "CMakeFiles/__idf_main.dir/e2ee.c.obj.d"
   "CMakeFiles/__idf_main.dir/hello_world_main.c.obj"
   "CMakeFiles/__idf_main.dir/hello_world_main.c.obj.d"
   "libmain.a"

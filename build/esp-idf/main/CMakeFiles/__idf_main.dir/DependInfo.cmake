@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/danchhu/hal/espnow/hello_world/main/e2ee.c" "esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj" "gcc" "esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj.d"
   "/home/danchhu/hal/espnow/hello_world/main/hello_world_main.c" "esp-idf/main/CMakeFiles/__idf_main.dir/hello_world_main.c.obj" "gcc" "esp-idf/main/CMakeFiles/__idf_main.dir/hello_world_main.c.obj.d"
   )
 

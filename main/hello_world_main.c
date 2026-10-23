@@ -1,8 +1,13 @@
 /*
- * ESP-NOW Auto-Discovery por proximidad
- * 
- * Mismo firmware para todos los ESP.
- * Se descubren solos por broadcast, sin hardcodear MACs.
+ * ESP-NOW E2EE — Auto-descubrimiento + cifrado extremo a extremo
+ *
+ * Mismo firmware para todos los ESP32-S3.
+ *  1. Al arrancar, cada placa genera un par X25519 efímero y lo anuncia
+ *     por broadcast (HELLO).
+ *  2. Cada par de placas deriva su propia clave AES-256-GCM (ECDH + KDF),
+ *     sin claves grabadas en el firmware (TOFU: primera clave vista gana).
+ *  3. Los datos viajan cifrados y autenticados; la huella del par se
+ *     imprime por serie para verificación manual.
  */
 
 #include <stdio.h>
@@ -15,81 +20,59 @@
 #include "esp_mac.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/queue.h"
+#include "e2ee.h"
 
-static const char *TAG = "ESP-NOW-DISCOVER";
-
-// ---------- Tipos de mensaje ----------
-typedef enum {
-    MSG_DISCOVERY = 1,
-    MSG_DISCOVERY_REPLY = 2,
-    MSG_DATA = 3,
-} msg_type_t;
-
-typedef struct {
-    msg_type_t type;
-    char nombre[16];
-} __attribute__((packed)) espnow_msg_t;
+static const char *TAG = "ESP-NOW-E2EE";
 
 // MAC de broadcast
 static const uint8_t BROADCAST_MAC[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-// ---------- Agregar peer si no existe ----------
-static void add_peer_if_new(const uint8_t *mac)
-{
-    if (esp_now_is_peer_exist(mac)) return;
+// ---------- Cola de recepción: el callback de WiFi solo encola ----------
+typedef struct {
+    uint8_t mac[6];
+    int     len;
+    uint8_t data[ESP_NOW_MAX_DATA_LEN];
+} rx_event_t;
 
-    esp_now_peer_info_t peer = {};
-    memcpy(peer.peer_addr, mac, 6);
-    peer.channel = 0;
-    peer.encrypt = false;
-    esp_now_add_peer(&peer);
+static QueueHandle_t s_rx_queue;
 
-    ESP_LOGI(TAG, "Nuevo peer: %02X:%02X:%02X:%02X:%02X:%02X",
-             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-}
-
-// ---------- Callback de recepcion ----------
 static void on_recv(const esp_now_recv_info_t *info, const uint8_t *data, int len)
 {
-    if (len < sizeof(espnow_msg_t)) return;
+    if (len <= 0 || len > ESP_NOW_MAX_DATA_LEN) return;
+    if (s_rx_queue == NULL) return;
 
-    const espnow_msg_t *msg = (const espnow_msg_t *)data;
-    const uint8_t *mac = info->src_addr;
+    rx_event_t evt;
+    memcpy(evt.mac, info->src_addr, 6);
+    evt.len = len;
+    memcpy(evt.data, data, len);
 
-    switch (msg->type) {
-        case MSG_DISCOVERY:
-            ESP_LOGI(TAG, "Discovery de %02X:%02X:%02X:%02X:%02X:%02X (%s)",
-                     mac[0], mac[1], mac[2], mac[3], mac[4], mac[5], msg->nombre);
-
-            // Agregar como peer
-            add_peer_if_new(mac);
-
-            // Responder para que nos conozca
-            espnow_msg_t reply = { .type = MSG_DISCOVERY_REPLY };
-            snprintf(reply.nombre, sizeof(reply.nombre), "ESP-%02X%02X", mac[4], mac[5]);
-            esp_now_send(mac, (uint8_t *)&reply, sizeof(reply));
-            break;
-
-        case MSG_DISCOVERY_REPLY:
-            ESP_LOGI(TAG, "Reply de %02X:%02X:%02X:%02X:%02X:%02X (%s)",
-                     mac[0], mac[1], mac[2], mac[3], mac[4], mac[5], msg->nombre);
-            add_peer_if_new(mac);
-            break;
-
-        case MSG_DATA:
-            ESP_LOGI(TAG, "Datos de %02X:%02X:%02X:%02X:%02X:%02X: %s",
-                     mac[0], mac[1], mac[2], mac[3], mac[4], mac[5],
-                     msg->nombre);
-            break;
+    if (xQueueSend(s_rx_queue, &evt, 0) != pdTRUE) {
+        ESP_LOGW(TAG, "Cola RX llena, paquete descartado");
     }
 }
 
-// ---------- Callback de envio ----------
 static void on_send(const esp_now_send_info_t *tx_info, esp_now_send_status_t status)
 {
     if (status != ESP_NOW_SEND_SUCCESS) {
         ESP_LOGW(TAG, "Envio fallido");
     }
+}
+
+// Tarea trabajadora: aquí va toda la criptografía (fuera del callback de WiFi)
+static void rx_worker(void *arg)
+{
+    rx_event_t evt;
+    while (xQueueReceive(s_rx_queue, &evt, portMAX_DELAY) == pdTRUE) {
+        e2ee_handle_packet(evt.mac, evt.data, evt.len);
+    }
+}
+
+// ---------- Datos de aplicación ya descifrados ----------
+static void on_secure_data(const uint8_t mac[6], const uint8_t *payload, size_t len)
+{
+    ESP_LOGI(TAG, "Mensaje seguro de %02X:%02X:%02X:%02X:%02X:%02X: \"%.*s\"",
+             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5], (int)len, payload);
 }
 
 // ---------- Inicializar WiFi + ESP-NOW ----------
@@ -109,43 +92,67 @@ static void init_espnow(void)
     esp_wifi_init(&cfg);
     esp_wifi_set_mode(WIFI_MODE_STA);
     esp_wifi_start();
+    esp_wifi_set_channel(1, WIFI_SECOND_CHAN_NONE);  // todos en el mismo canal
 
     // ESP-NOW
     esp_now_init();
     esp_now_register_recv_cb(on_recv);
     esp_now_register_send_cb(on_send);
 
-    // Peer de broadcast
+    // Peer de broadcast (sin cifrar: lo cifra la capa de aplicación)
     esp_now_peer_info_t broadcast_peer = {};
     memcpy(broadcast_peer.peer_addr, BROADCAST_MAC, 6);
+    broadcast_peer.channel = 1;
     esp_now_add_peer(&broadcast_peer);
 }
 
 void app_main(void)
 {
+    // Cola ANTES de arrancar ESP-NOW (para no perder paquetes).
+    // La tarea se crea después de e2ee_init: los paquetes que lleguen
+    // mientras tanto simplemente esperan en la cola.
+    s_rx_queue = xQueueCreate(8, sizeof(rx_event_t));
+
     init_espnow();
 
-    uint8_t mac[6];
-    esp_read_mac(mac, ESP_MAC_WIFI_STA);
-    ESP_LOGI(TAG, "Mi MAC: %02X:%02X:%02X:%02X:%02X:%02X",
-             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    ESP_ERROR_CHECK(e2ee_init());
+    e2ee_set_rx_callback(on_secure_data);
 
-    espnow_msg_t disc = { .type = MSG_DISCOVERY };
-    snprintf(disc.nombre, sizeof(disc.nombre), "ESP-%02X%02X", mac[4], mac[5]);
+    xTaskCreate(rx_worker, "e2ee_rx", 4096, NULL, 5, NULL);
 
+    // Anuncio inicial: 5 HELLO por broadcast (1 por segundo)
     for (int i = 0; i < 5; i++) {
-        ESP_LOGI(TAG, "Enviando discovery %d/5...", i + 1);
-        esp_now_send(BROADCAST_MAC, (uint8_t *)&disc, sizeof(disc));
+        ESP_LOGI(TAG, "Enviando HELLO %d/5...", i + 1);
+        e2ee_send_hello(BROADCAST_MAC);
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
-    ESP_LOGI(TAG, "Discovery completo. Listo para comunicar.");
+    ESP_LOGI(TAG, "Listo. Comunicación solo cifrada.");
 
     int contador = 0;
+    int rr = 0;  // round-robin entre peers
     while (1) {
-        vTaskDelay(pdMS_TO_TICKS(30000));
+        vTaskDelay(pdMS_TO_TICKS(15000));
         contador++;
-        ESP_LOGI(TAG, "Re-discovery #%d...", contador);
-        esp_now_send(BROADCAST_MAC, (uint8_t *)&disc, sizeof(disc));
+
+        // Enviar dato cifrado al siguiente peer con sesión establecida
+        uint8_t mac[6];
+        int n = e2ee_established_count();
+        if (n > 0 && e2ee_get_peer_mac(rr % n, mac)) {
+            rr++;
+            char msg[64];
+            int len = snprintf(msg, sizeof(msg), "hola #%d, cifrado de extremo a extremo",
+                               contador);
+            esp_err_t err = e2ee_send(mac, (uint8_t *)msg, len);
+            if (err == ESP_OK) {
+                ESP_LOGI(TAG, "Enviado cifrado a %02X:%02X:%02X:%02X:%02X:%02X: \"%s\"",
+                         mac[0], mac[1], mac[2], mac[3], mac[4], mac[5], msg);
+            } else {
+                ESP_LOGW(TAG, "e2ee_send fallo: %s", esp_err_to_name(err));
+            }
+        } else {
+            ESP_LOGI(TAG, "Sin peers seguros aun, re-anunciando HELLO...");
+            e2ee_send_hello(BROADCAST_MAC);
+        }
     }
 }

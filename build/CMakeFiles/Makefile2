@@ -2352,7 +2352,7 @@ CMakeFiles/flash.dir/all: esp-idf/partition_table/CMakeFiles/partition_table_bin
 
 # Build rule for subdir invocation for target.
 CMakeFiles/flash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 100
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/flash.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/flash.dir/rule
@@ -2453,7 +2453,7 @@ CMakeFiles/hello_world.elf.dir/all: esp-idf/main/CMakeFiles/__idf_main.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/hello_world.elf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/hello_world.elf.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/hello_world.elf.dir/rule
@@ -2583,7 +2583,7 @@ CMakeFiles/dfu.dir/all: CMakeFiles/gen_project_binary.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/dfu.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 100
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/dfu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/dfu.dir/rule
@@ -2745,7 +2745,7 @@ CMakeFiles/__ldgen_output_sections.ld.dir/all: esp-idf/main/CMakeFiles/__idf_mai
 
 # Build rule for subdir invocation for target.
 CMakeFiles/__ldgen_output_sections.ld.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/__ldgen_output_sections.ld.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/__ldgen_output_sections.ld.dir/rule
@@ -2777,7 +2777,7 @@ CMakeFiles/gen_hello_world_binary.dir/all: CMakeFiles/hello_world.elf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gen_hello_world_binary.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/gen_hello_world_binary.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/gen_hello_world_binary.dir/rule
@@ -2809,7 +2809,7 @@ CMakeFiles/gen_project_binary.dir/all: CMakeFiles/gen_hello_world_binary.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gen_project_binary.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/gen_project_binary.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/gen_project_binary.dir/rule
@@ -2842,7 +2842,7 @@ CMakeFiles/app.dir/all: CMakeFiles/app_check_size.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/app.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/app.dir/rule
@@ -2875,7 +2875,7 @@ CMakeFiles/app-flash.dir/all: CMakeFiles/app.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/app-flash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app-flash.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/app-flash.dir/rule
@@ -3004,7 +3004,7 @@ CMakeFiles/merge-bin.dir/all: CMakeFiles/gen_project_binary.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/merge-bin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 100
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/merge-bin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/merge-bin.dir/rule
@@ -3037,7 +3037,7 @@ CMakeFiles/monitor.dir/all: CMakeFiles/hello_world.elf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/monitor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/monitor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/monitor.dir/rule
@@ -3070,7 +3070,7 @@ CMakeFiles/app_check_size.dir/all: esp-idf/partition_table/CMakeFiles/partition_
 
 # Build rule for subdir invocation for target.
 CMakeFiles/app_check_size.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app_check_size.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : CMakeFiles/app_check_size.dir/rule
@@ -3103,7 +3103,7 @@ esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/all: esp-idf/esp_stdio/CMakeFiles/__i
 
 # Build rule for subdir invocation for target.
 esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/rule
@@ -3135,7 +3135,7 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/all: esp-idf/esp_hal_dma/CMakeF
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 97
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/rule
@@ -3167,7 +3167,7 @@ esp-idf/esp_hal_dma/CMakeFiles/__idf_esp_hal_dma.dir/all: esp-idf/esp_hal_gpspi/
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_dma/CMakeFiles/__idf_esp_hal_dma.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 97
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_dma/CMakeFiles/__idf_esp_hal_dma.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_dma/CMakeFiles/__idf_esp_hal_dma.dir/rule
@@ -3199,7 +3199,7 @@ esp-idf/esp_hal_gpspi/CMakeFiles/__idf_esp_hal_gpspi.dir/all: esp-idf/esp_hal_cl
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_gpspi/CMakeFiles/__idf_esp_hal_gpspi.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 96
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 97
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_gpspi/CMakeFiles/__idf_esp_hal_gpspi.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_gpspi/CMakeFiles/__idf_esp_hal_gpspi.dir/rule
@@ -3231,7 +3231,7 @@ esp-idf/esp_hal_clock/CMakeFiles/__idf_esp_hal_clock.dir/all: esp-idf/esp_hal_ms
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_clock/CMakeFiles/__idf_esp_hal_clock.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 95
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 96
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_clock/CMakeFiles/__idf_esp_hal_clock.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_clock/CMakeFiles/__idf_esp_hal_clock.dir/rule
@@ -3263,7 +3263,7 @@ esp-idf/esp_hal_mspi/CMakeFiles/__idf_esp_hal_mspi.dir/all: esp-idf/esp_hal_secu
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_mspi/CMakeFiles/__idf_esp_hal_mspi.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 95
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 96
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_mspi/CMakeFiles/__idf_esp_hal_mspi.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_mspi/CMakeFiles/__idf_esp_hal_mspi.dir/rule
@@ -3295,7 +3295,7 @@ esp-idf/esp_hal_security/CMakeFiles/__idf_esp_hal_security.dir/all: esp-idf/esp_
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_security/CMakeFiles/__idf_esp_hal_security.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 94
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 95
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_security/CMakeFiles/__idf_esp_hal_security.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_security/CMakeFiles/__idf_esp_hal_security.dir/rule
@@ -3450,12 +3450,12 @@ esp-idf/partition_table/CMakeFiles/partition-table.dir/clean:
 esp-idf/partition_table/CMakeFiles/partition_table.dir/all: esp-idf/partition_table/CMakeFiles/partition-table.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/partition_table.dir/build.make esp-idf/partition_table/CMakeFiles/partition_table.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/partition_table.dir/build.make esp-idf/partition_table/CMakeFiles/partition_table.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=93 "Built target partition_table"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Built target partition_table"
 .PHONY : esp-idf/partition_table/CMakeFiles/partition_table.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/partition_table/CMakeFiles/partition_table.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/partition_table/CMakeFiles/partition_table.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/partition_table/CMakeFiles/partition_table.dir/rule
@@ -3467,7 +3467,7 @@ partition_table: esp-idf/partition_table/CMakeFiles/partition_table.dir/rule
 # codegen rule for target.
 esp-idf/partition_table/CMakeFiles/partition_table.dir/codegen: esp-idf/partition_table/CMakeFiles/partition-table.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/partition_table.dir/build.make esp-idf/partition_table/CMakeFiles/partition_table.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=93 "Finished codegen for target partition_table"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Finished codegen for target partition_table"
 .PHONY : esp-idf/partition_table/CMakeFiles/partition_table.dir/codegen
 
 # clean rule for target.
@@ -3583,7 +3583,7 @@ esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/all: esp-idf/esp_boot
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 93
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 94
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/rule
@@ -3615,7 +3615,7 @@ esp-idf/esp_bootloader_format/CMakeFiles/__idf_esp_bootloader_format.dir/all: es
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_bootloader_format/CMakeFiles/__idf_esp_bootloader_format.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 93
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 94
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_bootloader_format/CMakeFiles/__idf_esp_bootloader_format.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_bootloader_format/CMakeFiles/__idf_esp_bootloader_format.dir/rule
@@ -3647,7 +3647,7 @@ esp-idf/app_update/CMakeFiles/__idf_app_update.dir/all: esp-idf/esp_partition/CM
 
 # Build rule for subdir invocation for target.
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 93
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 94
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/app_update/CMakeFiles/__idf_app_update.dir/rule
@@ -3679,7 +3679,7 @@ esp-idf/esp_partition/CMakeFiles/__idf_esp_partition.dir/all: esp-idf/efuse/CMak
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_partition/CMakeFiles/__idf_esp_partition.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 93
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 94
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_partition/CMakeFiles/__idf_esp_partition.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_partition/CMakeFiles/__idf_esp_partition.dir/rule
@@ -3711,7 +3711,7 @@ esp-idf/efuse/CMakeFiles/__idf_efuse.dir/all: esp-idf/esp_hal_timg/CMakeFiles/__
 
 # Build rule for subdir invocation for target.
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 92
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 93
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
@@ -3962,12 +3962,12 @@ esp-idf/efuse/CMakeFiles/efuse_test_table.dir/clean:
 esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/all: esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/build.make esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/build.make esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Built target __idf_esp_hal_timg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=14 "Built target __idf_esp_hal_timg"
 .PHONY : esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 90
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 91
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/rule
@@ -3979,7 +3979,7 @@ __idf_esp_hal_timg: esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/rule
 # codegen rule for target.
 esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/build.make esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Finished codegen for target __idf_esp_hal_timg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=14 "Finished codegen for target __idf_esp_hal_timg"
 .PHONY : esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/codegen
 
 # clean rule for target.
@@ -3994,7 +3994,7 @@ esp-idf/esp_hal_timg/CMakeFiles/__idf_esp_hal_timg.dir/clean:
 esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/all: esp-idf/esp_timer/CMakeFiles/__idf_esp_timer.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/build.make esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/build.make esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=14 "Built target __idf_esp_hal_systimer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Built target __idf_esp_hal_systimer"
 .PHONY : esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4011,7 +4011,7 @@ __idf_esp_hal_systimer: esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systim
 # codegen rule for target.
 esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/build.make esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=14 "Finished codegen for target __idf_esp_hal_systimer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Finished codegen for target __idf_esp_hal_systimer"
 .PHONY : esp-idf/esp_hal_systimer/CMakeFiles/__idf_esp_hal_systimer.dir/codegen
 
 # clean rule for target.
@@ -4031,7 +4031,7 @@ esp-idf/esp_timer/CMakeFiles/__idf_esp_timer.dir/all: esp-idf/esp_security/CMake
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_timer/CMakeFiles/__idf_esp_timer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 89
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 90
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_timer/CMakeFiles/__idf_esp_timer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_timer/CMakeFiles/__idf_esp_timer.dir/rule
@@ -4063,7 +4063,7 @@ esp-idf/esp_security/CMakeFiles/__idf_esp_security.dir/all: esp-idf/esp_driver_g
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_security/CMakeFiles/__idf_esp_security.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 88
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 89
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_security/CMakeFiles/__idf_esp_security.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_security/CMakeFiles/__idf_esp_security.dir/rule
@@ -4095,7 +4095,7 @@ esp-idf/esp_driver_gpio/CMakeFiles/__idf_esp_driver_gpio.dir/all: esp-idf/esp_ha
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_driver_gpio/CMakeFiles/__idf_esp_driver_gpio.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 87
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 88
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_driver_gpio/CMakeFiles/__idf_esp_driver_gpio.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_driver_gpio/CMakeFiles/__idf_esp_driver_gpio.dir/rule
@@ -4127,7 +4127,7 @@ esp-idf/esp_hal_uart/CMakeFiles/__idf_esp_hal_uart.dir/all: esp-idf/esp_pm/CMake
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_uart/CMakeFiles/__idf_esp_hal_uart.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 87
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 88
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_uart/CMakeFiles/__idf_esp_hal_uart.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_uart/CMakeFiles/__idf_esp_hal_uart.dir/rule
@@ -4159,7 +4159,7 @@ esp-idf/esp_pm/CMakeFiles/__idf_esp_pm.dir/all: esp-idf/esp_mm/CMakeFiles/__idf_
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_pm/CMakeFiles/__idf_esp_pm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 86
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 87
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_pm/CMakeFiles/__idf_esp_pm.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_pm/CMakeFiles/__idf_esp_pm.dir/rule
@@ -4191,7 +4191,7 @@ esp-idf/esp_mm/CMakeFiles/__idf_esp_mm.dir/all: esp-idf/esp_driver_dma/CMakeFile
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_mm/CMakeFiles/__idf_esp_mm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 86
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 87
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_mm/CMakeFiles/__idf_esp_mm.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_mm/CMakeFiles/__idf_esp_mm.dir/rule
@@ -4223,7 +4223,7 @@ esp-idf/esp_driver_dma/CMakeFiles/__idf_esp_driver_dma.dir/all: esp-idf/mbedtls/
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_driver_dma/CMakeFiles/__idf_esp_driver_dma.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 85
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 86
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_driver_dma/CMakeFiles/__idf_esp_driver_dma.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_driver_dma/CMakeFiles/__idf_esp_driver_dma.dir/rule
@@ -4255,7 +4255,7 @@ esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/all: esp-idf/mbedtls/mbedtls/librar
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 84
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 85
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/rule
@@ -4378,12 +4378,12 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/CMakeFiles/tfpsacrypto-apidoc.dir/clean:
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/all: esp-idf/esp_hal_wdt/CMakeFiles/__idf_esp_hal_wdt.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Built target everest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=86 "Built target everest"
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 63
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 64
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/rule
@@ -4395,7 +4395,7 @@ everest: esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everes
 # codegen rule for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Finished codegen for target everest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=86 "Finished codegen for target everest"
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/codegen
 
 # clean rule for target.
@@ -4410,12 +4410,12 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/cle
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/all: esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/everest/CMakeFiles/everest.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Built target p256-m"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=93 "Built target p256-m"
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 63
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 65
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/rule
@@ -4427,7 +4427,7 @@ p256-m: esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.d
 # codegen rule for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num= "Finished codegen for target p256-m"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=93 "Finished codegen for target p256-m"
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/p256-m/CMakeFiles/p256-m.dir/codegen
 
 # clean rule for target.
@@ -4447,7 +4447,7 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/builtin/CMakeFiles/builtin.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/builtin/CMakeFiles/builtin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 69
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 71
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/builtin/CMakeFiles/builtin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/builtin/CMakeFiles/builtin.dir/rule
@@ -4479,7 +4479,7 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/pqcp/CMakeFiles/pqcp.dir/all: esp-
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/pqcp/CMakeFiles/pqcp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 70
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 72
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/pqcp/CMakeFiles/pqcp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/pqcp/CMakeFiles/pqcp.dir/rule
@@ -4506,12 +4506,12 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/pqcp/CMakeFiles/pqcp.dir/clean:
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/all: esp-idf/mbedtls/mbedtls/tf-psa-crypto/drivers/pqcp/CMakeFiles/pqcp.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=86,87 "Built target extras"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=87 "Built target extras"
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 72
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 73
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/rule
@@ -4523,7 +4523,7 @@ extras: esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/rule
 # codegen rule for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/build.make esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=86,87 "Finished codegen for target extras"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=87 "Finished codegen for target extras"
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/extras/CMakeFiles/extras.dir/codegen
 
 # clean rule for target.
@@ -4543,7 +4543,7 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/platform/CMakeFiles/platform.dir/all: esp-
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/platform/CMakeFiles/platform.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 72
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 73
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/platform/CMakeFiles/platform.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/platform/CMakeFiles/platform.dir/rule
@@ -4575,7 +4575,7 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/utilities/CMakeFiles/utilities.dir/all: es
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/utilities/CMakeFiles/utilities.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 73
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 74
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/utilities/CMakeFiles/utilities.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/utilities/CMakeFiles/utilities.dir/rule
@@ -4613,7 +4613,7 @@ esp-idf/mbedtls/mbedtls/tf-psa-crypto/core/CMakeFiles/tfpsacrypto.dir/all: esp-i
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/tf-psa-crypto/core/CMakeFiles/tfpsacrypto.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 78
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 79
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/tf-psa-crypto/core/CMakeFiles/tfpsacrypto.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/tf-psa-crypto/core/CMakeFiles/tfpsacrypto.dir/rule
@@ -4650,7 +4650,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/all: esp-idf/mbedtls/mbe
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 83
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 84
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/rule
@@ -4682,7 +4682,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/all: esp-idf/mbedtls/mbed
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 81
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 82
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/rule
@@ -4714,7 +4714,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/lib.dir/all: esp-idf/xtensa/CMakeFile
 
 # Build rule for subdir invocation for target.
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/lib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/mbedtls/mbedtls/library/CMakeFiles/lib.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/mbedtls/mbedtls/library/CMakeFiles/lib.dir/rule
@@ -5061,7 +5061,7 @@ esp-idf/hal/CMakeFiles/__idf_hal.dir/clean:
 esp-idf/log/CMakeFiles/__idf_log.dir/all: esp-idf/heap/CMakeFiles/__idf_heap.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/log/CMakeFiles/__idf_log.dir/build.make esp-idf/log/CMakeFiles/__idf_log.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/log/CMakeFiles/__idf_log.dir/build.make esp-idf/log/CMakeFiles/__idf_log.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=46,47 "Built target __idf_log"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=46 "Built target __idf_log"
 .PHONY : esp-idf/log/CMakeFiles/__idf_log.dir/all
 
 # Build rule for subdir invocation for target.
@@ -5078,7 +5078,7 @@ __idf_log: esp-idf/log/CMakeFiles/__idf_log.dir/rule
 # codegen rule for target.
 esp-idf/log/CMakeFiles/__idf_log.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f esp-idf/log/CMakeFiles/__idf_log.dir/build.make esp-idf/log/CMakeFiles/__idf_log.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=46,47 "Finished codegen for target __idf_log"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=46 "Finished codegen for target __idf_log"
 .PHONY : esp-idf/log/CMakeFiles/__idf_log.dir/codegen
 
 # clean rule for target.
@@ -5098,7 +5098,7 @@ esp-idf/heap/CMakeFiles/__idf_heap.dir/all: esp-idf/soc/CMakeFiles/__idf_soc.dir
 
 # Build rule for subdir invocation for target.
 esp-idf/heap/CMakeFiles/__idf_heap.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 48
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 49
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/heap/CMakeFiles/__idf_heap.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/heap/CMakeFiles/__idf_heap.dir/rule
@@ -5130,7 +5130,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/all: esp-idf/esp_hal_gpio/CMakeFiles/__idf_
 
 # Build rule for subdir invocation for target.
 esp-idf/soc/CMakeFiles/__idf_soc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 47
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 48
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/soc/CMakeFiles/__idf_soc.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/soc/CMakeFiles/__idf_soc.dir/rule
@@ -5162,7 +5162,7 @@ esp-idf/esp_hal_gpio/CMakeFiles/__idf_esp_hal_gpio.dir/all: esp-idf/esp_hal_usb/
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_gpio/CMakeFiles/__idf_esp_hal_gpio.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 46
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 47
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_gpio/CMakeFiles/__idf_esp_hal_gpio.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_gpio/CMakeFiles/__idf_esp_hal_gpio.dir/rule
@@ -5194,7 +5194,7 @@ esp-idf/esp_hal_usb/CMakeFiles/__idf_esp_hal_usb.dir/all: esp-idf/esp_hal_pmu/CM
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_usb/CMakeFiles/__idf_esp_hal_usb.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 46
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 47
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_usb/CMakeFiles/__idf_esp_hal_usb.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_usb/CMakeFiles/__idf_esp_hal_usb.dir/rule
@@ -5226,7 +5226,7 @@ esp-idf/esp_hal_pmu/CMakeFiles/__idf_esp_hal_pmu.dir/all: esp-idf/esp_hal_touch_
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_pmu/CMakeFiles/__idf_esp_hal_pmu.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 46
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_pmu/CMakeFiles/__idf_esp_hal_pmu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_pmu/CMakeFiles/__idf_esp_hal_pmu.dir/rule
@@ -5258,7 +5258,7 @@ esp-idf/esp_hal_touch_sens/CMakeFiles/__idf_esp_hal_touch_sens.dir/all: esp-idf/
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hal_touch_sens/CMakeFiles/__idf_esp_hal_touch_sens.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 46
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hal_touch_sens/CMakeFiles/__idf_esp_hal_touch_sens.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hal_touch_sens/CMakeFiles/__idf_esp_hal_touch_sens.dir/rule
@@ -5290,7 +5290,7 @@ esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all: esp-idf/freertos
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 46
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/rule
@@ -5322,7 +5322,7 @@ esp-idf/freertos/CMakeFiles/__idf_freertos.dir/all: esp-idf/esp_libc/CMakeFiles/
 
 # Build rule for subdir invocation for target.
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 38
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 39
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/freertos/CMakeFiles/__idf_freertos.dir/rule
@@ -5354,7 +5354,7 @@ esp-idf/esp_libc/CMakeFiles/__idf_esp_libc.dir/all: esp-idf/pthread/CMakeFiles/_
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_libc/CMakeFiles/__idf_esp_libc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 36
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 37
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_libc/CMakeFiles/__idf_esp_libc.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_libc/CMakeFiles/__idf_esp_libc.dir/rule
@@ -5386,7 +5386,7 @@ esp-idf/pthread/CMakeFiles/__idf_pthread.dir/all: esp-idf/cxx/CMakeFiles/__idf_c
 
 # Build rule for subdir invocation for target.
 esp-idf/pthread/CMakeFiles/__idf_pthread.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 33
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 34
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/pthread/CMakeFiles/__idf_pthread.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/pthread/CMakeFiles/__idf_pthread.dir/rule
@@ -5418,7 +5418,7 @@ esp-idf/cxx/CMakeFiles/__idf_cxx.dir/all: esp-idf/esp_event/CMakeFiles/__idf_esp
 
 # Build rule for subdir invocation for target.
 esp-idf/cxx/CMakeFiles/__idf_cxx.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 32
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 33
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/cxx/CMakeFiles/__idf_cxx.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/cxx/CMakeFiles/__idf_cxx.dir/rule
@@ -5450,7 +5450,7 @@ esp-idf/esp_event/CMakeFiles/__idf_esp_event.dir/all: esp-idf/nvs_sec_provider/C
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_event/CMakeFiles/__idf_esp_event.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 32
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 33
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_event/CMakeFiles/__idf_esp_event.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_event/CMakeFiles/__idf_esp_event.dir/rule
@@ -5482,7 +5482,7 @@ esp-idf/nvs_sec_provider/CMakeFiles/__idf_nvs_sec_provider.dir/all: esp-idf/nvs_
 
 # Build rule for subdir invocation for target.
 esp-idf/nvs_sec_provider/CMakeFiles/__idf_nvs_sec_provider.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 32
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/nvs_sec_provider/CMakeFiles/__idf_nvs_sec_provider.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/nvs_sec_provider/CMakeFiles/__idf_nvs_sec_provider.dir/rule
@@ -5514,7 +5514,7 @@ esp-idf/nvs_flash/CMakeFiles/__idf_nvs_flash.dir/all: esp-idf/esp_phy/CMakeFiles
 
 # Build rule for subdir invocation for target.
 esp-idf/nvs_flash/CMakeFiles/__idf_nvs_flash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 32
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/nvs_flash/CMakeFiles/__idf_nvs_flash.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/nvs_flash/CMakeFiles/__idf_nvs_flash.dir/rule
@@ -5546,7 +5546,7 @@ esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/all: esp-idf/esp_ringbuf/CMakeFiles
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 29
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 30
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/rule
@@ -5578,7 +5578,7 @@ esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/all: esp-idf/esp_psram/CMak
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 29
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/rule
@@ -5610,7 +5610,7 @@ esp-idf/esp_psram/CMakeFiles/__idf_esp_psram.dir/all: esp-idf/esp_driver_uart/CM
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_psram/CMakeFiles/__idf_esp_psram.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 28
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_psram/CMakeFiles/__idf_esp_psram.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_psram/CMakeFiles/__idf_esp_psram.dir/rule
@@ -5642,7 +5642,7 @@ esp-idf/esp_driver_uart/CMakeFiles/__idf_esp_driver_uart.dir/all: esp-idf/esp_dr
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_driver_uart/CMakeFiles/__idf_esp_driver_uart.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 28
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_driver_uart/CMakeFiles/__idf_esp_driver_uart.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_driver_uart/CMakeFiles/__idf_esp_driver_uart.dir/rule
@@ -5674,7 +5674,7 @@ esp-idf/esp_driver_usb_serial_jtag/CMakeFiles/__idf_esp_driver_usb_serial_jtag.d
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_driver_usb_serial_jtag/CMakeFiles/__idf_esp_driver_usb_serial_jtag.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 26
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 27
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_driver_usb_serial_jtag/CMakeFiles/__idf_esp_driver_usb_serial_jtag.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/esp_driver_usb_serial_jtag/CMakeFiles/__idf_esp_driver_usb_serial_jtag.dir/rule
@@ -5706,7 +5706,7 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/all: esp-idf/lwip/CMakeFiles/__idf_lwip.dir
 
 # Build rule for subdir invocation for target.
 esp-idf/vfs/CMakeFiles/__idf_vfs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 26
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 27
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/vfs/CMakeFiles/__idf_vfs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/vfs/CMakeFiles/__idf_vfs.dir/rule
@@ -5733,12 +5733,12 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/clean:
 esp-idf/lwip/CMakeFiles/__idf_lwip.dir/all: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=48,49,50,51,52,53,54,55,56,57,58 "Built target __idf_lwip"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=47,48,49,50,51,52,53,54,55,56,57,58 "Built target __idf_lwip"
 .PHONY : esp-idf/lwip/CMakeFiles/__idf_lwip.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/lwip/CMakeFiles/__idf_lwip.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 25
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 26
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/lwip/CMakeFiles/__idf_lwip.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/lwip/CMakeFiles/__idf_lwip.dir/rule
@@ -5750,7 +5750,7 @@ __idf_lwip: esp-idf/lwip/CMakeFiles/__idf_lwip.dir/rule
 # codegen rule for target.
 esp-idf/lwip/CMakeFiles/__idf_lwip.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=48,49,50,51,52,53,54,55,56,57,58 "Finished codegen for target __idf_lwip"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=47,48,49,50,51,52,53,54,55,56,57,58 "Finished codegen for target __idf_lwip"
 .PHONY : esp-idf/lwip/CMakeFiles/__idf_lwip.dir/codegen
 
 # clean rule for target.
@@ -5900,7 +5900,7 @@ esp-idf/main/CMakeFiles/__idf_main.dir/all: esp-idf/xtensa/CMakeFiles/__idf_xten
 
 # Build rule for subdir invocation for target.
 esp-idf/main/CMakeFiles/__idf_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 98
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 99
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/main/CMakeFiles/__idf_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danchhu/hal/espnow/hello_world/build/CMakeFiles 0
 .PHONY : esp-idf/main/CMakeFiles/__idf_main.dir/rule

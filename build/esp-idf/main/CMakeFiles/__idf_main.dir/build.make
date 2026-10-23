@@ -86,17 +86,33 @@ esp-idf/main/CMakeFiles/__idf_main.dir/hello_world_main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/__idf_main.dir/hello_world_main.c.s"
 	cd /home/danchhu/hal/espnow/hello_world/build/esp-idf/main && /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/danchhu/hal/espnow/hello_world/main/hello_world_main.c -o CMakeFiles/__idf_main.dir/hello_world_main.c.s
 
+esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj: esp-idf/main/CMakeFiles/__idf_main.dir/flags.make
+esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj: /home/danchhu/hal/espnow/hello_world/main/e2ee.c
+esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj: esp-idf/main/CMakeFiles/__idf_main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj"
+	cd /home/danchhu/hal/espnow/hello_world/build/esp-idf/main && /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj -MF CMakeFiles/__idf_main.dir/e2ee.c.obj.d -o CMakeFiles/__idf_main.dir/e2ee.c.obj -c /home/danchhu/hal/espnow/hello_world/main/e2ee.c
+
+esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/__idf_main.dir/e2ee.c.i"
+	cd /home/danchhu/hal/espnow/hello_world/build/esp-idf/main && /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/danchhu/hal/espnow/hello_world/main/e2ee.c > CMakeFiles/__idf_main.dir/e2ee.c.i
+
+esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/__idf_main.dir/e2ee.c.s"
+	cd /home/danchhu/hal/espnow/hello_world/build/esp-idf/main && /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/danchhu/hal/espnow/hello_world/main/e2ee.c -o CMakeFiles/__idf_main.dir/e2ee.c.s
+
 # Object files for target __idf_main
 __idf_main_OBJECTS = \
-"CMakeFiles/__idf_main.dir/hello_world_main.c.obj"
+"CMakeFiles/__idf_main.dir/hello_world_main.c.obj" \
+"CMakeFiles/__idf_main.dir/e2ee.c.obj"
 
 # External object files for target __idf_main
 __idf_main_EXTERNAL_OBJECTS =
 
 esp-idf/main/libmain.a: esp-idf/main/CMakeFiles/__idf_main.dir/hello_world_main.c.obj
+esp-idf/main/libmain.a: esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj
 esp-idf/main/libmain.a: esp-idf/main/CMakeFiles/__idf_main.dir/build.make
 esp-idf/main/libmain.a: esp-idf/main/CMakeFiles/__idf_main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libmain.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/danchhu/hal/espnow/hello_world/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C static library libmain.a"
 	cd /home/danchhu/hal/espnow/hello_world/build/esp-idf/main && $(CMAKE_COMMAND) -P CMakeFiles/__idf_main.dir/cmake_clean_target.cmake
 	cd /home/danchhu/hal/espnow/hello_world/build/esp-idf/main && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/__idf_main.dir/link.txt --verbose=$(VERBOSE)
 

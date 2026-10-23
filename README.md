@@ -1,53 +1,65 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-H21 | ESP32-H4 | ESP32-P4 | ESP32-S2 | ESP32-S3 | ESP32-S31 | Linux |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | --------- | -------- | --------- | -------- | -------- | -------- | -------- | --------- | ----- |
+# ESP-NOW E2EE — Cifrado extremo a extremo para ESP32-S3
 
-# Hello World Example
+Mismo firmware para todas las placas. Las placas se auto-descubren por
+broadcast y establecen **canales cifrados punto a punto** sin ninguna clave
+grabada en el firmware.
 
-Starts a FreeRTOS task to print "Hello World".
+## Cómo funciona
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+1. Al arrancar, cada placa genera un **par de claves X25519 efímero** (solo
+   vive en RAM) y lo anuncia por broadcast en un mensaje `HELLO`.
+2. Cada **par de placas** hace ECDH y deriva su propia **clave de sesión
+   AES-256-GCM** (ConcatKDF-SHA-256). TOFU: se acepta la primera clave
+   pública vista de cada MAC.
+3. Todo el tráfico de datos va cifrado y autenticado con AES-256-GCM, con
+   contador monotónico contra replay. AAD = MAC del emisor, así nadie puede
+   reetiquetar un mensaje como de otra placa.
+4. Al establecerse cada sesión se imprime una **huella** por el puerto serie
+   (idéntica en ambas placas): comparándola se detecta un man-in-the-middle
+   durante el emparejado.
 
-## How to use example
-
-Follow detailed instructions provided specifically for this example.
-
-Select the instructions depending on Espressif chip installed on your development board:
-
-- [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
-- [ESP32-S2 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
-
-
-## Example folder contents
-
-The project **hello_world** contains one source file in C language [hello_world_main.c](main/hello_world_main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt` files that provide set of directives and instructions describing the project's source files and targets (executable, library, or both).
-
-Below is short explanation of remaining files in the project folder.
+## Formato de paquetes (capa de aplicación sobre ESP-NOW)
 
 ```
-├── CMakeLists.txt
-├── pytest_hello_world.py      Python script used for automated testing
-├── main
-│   ├── CMakeLists.txt
-│   └── hello_world_main.c
-└── README.md                  This is the file you are currently reading
+HELLO:  [ver=1][tipo=1][pub X25519:32][boot_nonce:8][nombre:8]   (sin cifrar)
+DATA:   [ver=1][tipo=2][nonce:12][AES-256-GCM(seq:8 || payload)][tag:16]
+        nonce = salt_sesión:4 || seq:8  (bit de dirección en el salt)
 ```
 
-For more information on structure and contents of ESP-IDF projects, please refer to Section [Build System](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html) of the ESP-IDF Programming Guide.
+Propiedades: confidencialidad e integridad por par, secreto hacia adelante
+entre reinicios (claves efímeras), anti-replay, anti-suplantación de emisor.
 
-## Troubleshooting
+## Uso
 
-* Program upload failure
+```bash
+idf.py build
+idf.py -p /dev/ttyUSB0 flash monitor   # repetir en cada placa
+```
 
-    * Hardware connection is not correct: run `idf.py -p PORT monitor`, and reboot your board to see if there are any output logs.
-    * The baud rate for downloading is too high: lower your baud rate in the `menuconfig` menu, and try again.
+Salida esperada al emparejar dos placas:
 
-## Technical support and feedback
+```
+I (xxx) E2EE: E2EE listo. Soy ESP-4A1B (24:ec:4a:11:22:33)
+I (xxx) E2EE: Sesión segura establecida con ESP-9C2D (48:ca:43:aa:bb:cc)
+I (xxx) E2EE: 🔒 Huella del par 48:ca:43:aa:bb:cc: 7F3A91C2-04BE88D1
+I (xxx) ESP-NOW-E2EE: Enviado cifrado a 48:ca:43:aa:bb:cc: "hola #1..."
+I (xxx) ESP-NOW-E2EE: Mensaje seguro de 48:ca:43:aa:bb:cc: "hola #1..."
+```
 
-Please use the following feedback channels:
+La huella debe coincidir en ambas consolas serie.
 
-* For technical queries, go to the [esp32.com](https://esp32.com/) forum
-* For a feature request or bug report, create a [GitHub issue](https://github.com/espressif/esp-idf/issues)
+## Límites (diseño de laboratorio)
 
-We will get back to you as soon as possible.
+- Payload de aplicación: **212 bytes** por mensaje (`E2EE_MAX_PAYLOAD`).
+- Máx. **8 peers** simultáneos (`MAX_PEERS` en `e2ee.c`).
+- TOFU: la ventana de ataque MITM es solo durante el primer HELLO; verifiquen
+  la huella por serie si importa.
+- Un atacante puede forzar re-negociación (DoS) reenviando HELLOs viejos;
+  no obtiene ninguna clave, pero puede interrumpir el enlace.
+
+## Archivos
+
+| Archivo | Contenido |
+|---|---|
+| `main/e2ee.c` / `e2ee.h` | Protocolo: handshake X25519, KDF, AES-GCM, tabla de sesiones |
+| `main/hello_world_main.c` | App: WiFi/ESP-NOW, cola RX + tarea cripto, demo de envío |

@@ -175,6 +175,30 @@ __idf_main/fast:
 	cd /home/danchhu/hal/espnow/hello_world/build && $(MAKE) $(MAKESILENT) -f esp-idf/main/CMakeFiles/__idf_main.dir/build.make esp-idf/main/CMakeFiles/__idf_main.dir/build
 .PHONY : __idf_main/fast
 
+e2ee.obj: e2ee.c.obj
+.PHONY : e2ee.obj
+
+# target to build an object file
+e2ee.c.obj:
+	cd /home/danchhu/hal/espnow/hello_world/build && $(MAKE) $(MAKESILENT) -f esp-idf/main/CMakeFiles/__idf_main.dir/build.make esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.obj
+.PHONY : e2ee.c.obj
+
+e2ee.i: e2ee.c.i
+.PHONY : e2ee.i
+
+# target to preprocess a source file
+e2ee.c.i:
+	cd /home/danchhu/hal/espnow/hello_world/build && $(MAKE) $(MAKESILENT) -f esp-idf/main/CMakeFiles/__idf_main.dir/build.make esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.i
+.PHONY : e2ee.c.i
+
+e2ee.s: e2ee.c.s
+.PHONY : e2ee.s
+
+# target to generate assembly for a file
+e2ee.c.s:
+	cd /home/danchhu/hal/espnow/hello_world/build && $(MAKE) $(MAKESILENT) -f esp-idf/main/CMakeFiles/__idf_main.dir/build.make esp-idf/main/CMakeFiles/__idf_main.dir/e2ee.c.s
+.PHONY : e2ee.c.s
+
 hello_world_main.obj: hello_world_main.c.obj
 .PHONY : hello_world_main.obj
 
@@ -212,6 +236,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_main"
+	@echo "... e2ee.obj"
+	@echo "... e2ee.i"
+	@echo "... e2ee.s"
 	@echo "... hello_world_main.obj"
 	@echo "... hello_world_main.i"
 	@echo "... hello_world_main.s"

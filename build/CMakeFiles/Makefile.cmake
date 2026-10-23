@@ -192,6 +192,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/danchhu/hal/esp-idf/tools/cmake/version.cmake"
   "/home/danchhu/hal/esp-idf/tools/kconfig_new/confgen.py"
   "/home/danchhu/hal/esp-idf/tools/kconfig_new/config.env.in"
+  "/home/danchhu/hal/espnow/hello_world/.git/HEAD"
+  "/home/danchhu/hal/espnow/hello_world/.git/refs/heads/crypto"
   "/home/danchhu/hal/espnow/hello_world/CMakeLists.txt"
   "CMakeFiles/3.31.6/CMakeASMCompiler.cmake"
   "CMakeFiles/3.31.6/CMakeCCompiler.cmake"
@@ -277,6 +279,9 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "CMakeFiles/git-data/HEAD"
+  "CMakeFiles/git-data/grabRef.cmake"
+  "CMakeFiles/git-data/head-ref"
   "CMakeFiles/git-data/HEAD"
   "CMakeFiles/git-data/grabRef.cmake"
   "CMakeFiles/git-data/head-ref"
