@@ -653,6 +653,13 @@
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/esp_wifi/remote/CMakeFiles/install.dir
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/esp_wifi/remote/CMakeFiles/install/local.dir
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/esp_wifi/remote/CMakeFiles/install/strip.dir
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/CMakeFiles/__idf_console.dir
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/CMakeFiles/edit_cache.dir
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/CMakeFiles/rebuild_cache.dir
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/CMakeFiles/list_install_components.dir
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/CMakeFiles/install.dir
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/CMakeFiles/install/local.dir
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/CMakeFiles/install/strip.dir
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/main/CMakeFiles/__idf_main.dir
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/main/CMakeFiles/edit_cache.dir
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/main/CMakeFiles/rebuild_cache.dir

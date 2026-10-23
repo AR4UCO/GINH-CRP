@@ -22,6 +22,7 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include "e2ee.h"
+#include "cli.h"
 
 static const char *TAG = "ESP-NOW-E2EE";
 
@@ -71,8 +72,11 @@ static void rx_worker(void *arg)
 // ---------- Datos de aplicación ya descifrados ----------
 static void on_secure_data(const uint8_t mac[6], const uint8_t *payload, size_t len)
 {
-    ESP_LOGI(TAG, "Mensaje seguro de %02X:%02X:%02X:%02X:%02X:%02X: \"%.*s\"",
-             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5], (int)len, payload);
+    char name[32];
+    if (!e2ee_lookup_name(mac, name, sizeof(name)))
+        snprintf(name, sizeof(name), MACSTR, MAC2STR(mac));
+
+    ESP_LOGI(TAG, "MSG de %s: %.*s", name, (int)len, payload);
 }
 
 // ---------- Inicializar WiFi + ESP-NOW ----------
@@ -120,6 +124,9 @@ void app_main(void)
 
     xTaskCreate(rx_worker, "e2ee_rx", 4096, NULL, 5, NULL);
 
+    // Consola interactiva: send / sendto / peers / hello / whoami
+    cli_start();
+
     // Anuncio inicial: 5 HELLO por broadcast (1 por segundo)
     for (int i = 0; i < 5; i++) {
         ESP_LOGI(TAG, "Enviando HELLO %d/5...", i + 1);
@@ -127,32 +134,11 @@ void app_main(void)
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
-    ESP_LOGI(TAG, "Listo. Comunicación solo cifrada.");
+    ESP_LOGI(TAG, "Listo. 'send <texto>' para enviar cifrado, 'help' para comandos.");
 
-    int contador = 0;
-    int rr = 0;  // round-robin entre peers
+    // Re-anuncio periódico: si ya hay sesión, los peers lo ignoran en silencio.
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(15000));
-        contador++;
-
-        // Enviar dato cifrado al siguiente peer con sesión establecida
-        uint8_t mac[6];
-        int n = e2ee_established_count();
-        if (n > 0 && e2ee_get_peer_mac(rr % n, mac)) {
-            rr++;
-            char msg[64];
-            int len = snprintf(msg, sizeof(msg), "hola #%d, cifrado de extremo a extremo",
-                               contador);
-            esp_err_t err = e2ee_send(mac, (uint8_t *)msg, len);
-            if (err == ESP_OK) {
-                ESP_LOGI(TAG, "Enviado cifrado a %02X:%02X:%02X:%02X:%02X:%02X: \"%s\"",
-                         mac[0], mac[1], mac[2], mac[3], mac[4], mac[5], msg);
-            } else {
-                ESP_LOGW(TAG, "e2ee_send fallo: %s", esp_err_to_name(err));
-            }
-        } else {
-            ESP_LOGI(TAG, "Sin peers seguros aun, re-anunciando HELLO...");
-            e2ee_send_hello(BROADCAST_MAC);
-        }
+        e2ee_send_hello(BROADCAST_MAC);
     }
 }

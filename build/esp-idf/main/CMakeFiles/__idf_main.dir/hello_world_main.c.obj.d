@@ -132,4 +132,5 @@ esp-idf/main/CMakeFiles/__idf_main.dir/hello_world_main.c.obj: \
  /home/danchhu/hal/esp-idf/components/esp_partition/include/esp_partition.h \
  /home/danchhu/hal/esp-idf/components/esp_blockdev/include/esp_blockdev.h \
  /home/danchhu/hal/esp-idf/components/esp_hw_support/include/esp_mac.h \
- /home/danchhu/hal/espnow/hello_world/main/e2ee.h
+ /home/danchhu/hal/espnow/hello_world/main/e2ee.h \
+ /home/danchhu/hal/espnow/hello_world/main/cli.h

@@ -151,7 +151,9 @@ hello_world.elf: esp-idf/esp_netif/libesp_netif.a
 hello_world.elf: esp-idf/wpa_supplicant/libwpa_supplicant.a
 hello_world.elf: esp-idf/esp_coex/libesp_coex.a
 hello_world.elf: esp-idf/esp_wifi/libesp_wifi.a
+hello_world.elf: esp-idf/console/libconsole.a
 hello_world.elf: esp-idf/main/libmain.a
+hello_world.elf: esp-idf/console/libconsole.a
 hello_world.elf: esp-idf/xtensa/libxtensa.a
 hello_world.elf: esp-idf/esp_stdio/libesp_stdio.a
 hello_world.elf: esp-idf/esp_hal_dma/libesp_hal_dma.a

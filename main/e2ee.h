@@ -34,8 +34,23 @@ esp_err_t e2ee_send(const uint8_t mac[6], const uint8_t *data, size_t len);
  * Llamar desde la tarea trabajadora, NO desde el callback de WiFi. */
 void e2ee_handle_packet(const uint8_t src_mac[6], const uint8_t *data, int len);
 
+/* Datos de un peer con sesión establecida. */
+typedef struct {
+    uint8_t  mac[6];
+    char     name[16];
+    uint8_t  fingerprint[8];   // huella corta del par (idéntica en ambas placas)
+    uint64_t tx_seq;
+    uint64_t rx_seq;
+} e2ee_peer_info_t;
+
 /* Número de sesiones seguras establecidas. */
 int e2ee_established_count(void);
 
-/* MAC del peer establecido nº idx (para round-robin). false si no existe. */
-bool e2ee_get_peer_mac(int idx, uint8_t mac[6]);
+/* Copia los datos del peer establecido nº idx. false si no existe. */
+bool e2ee_get_peer_info(int idx, e2ee_peer_info_t *out);
+
+/* Datos propios (MAC y nombre). */
+void e2ee_get_self(uint8_t mac[6], char *name, size_t name_len);
+
+/* Nombre del peer con esa MAC (si tiene sesión). false si no existe. */
+bool e2ee_lookup_name(const uint8_t mac[6], char *name, size_t name_len);

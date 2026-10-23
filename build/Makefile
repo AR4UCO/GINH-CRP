@@ -1657,6 +1657,19 @@ __idf_esp_wifi/fast:
 .PHONY : __idf_esp_wifi/fast
 
 #=============================================================================
+# Target rules for targets named __idf_console
+
+# Build rule for target.
+__idf_console: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_console
+.PHONY : __idf_console
+
+# fast build rule for target.
+__idf_console/fast:
+	$(MAKE) $(MAKESILENT) -f esp-idf/console/CMakeFiles/__idf_console.dir/build.make esp-idf/console/CMakeFiles/__idf_console.dir/build
+.PHONY : __idf_console/fast
+
+#=============================================================================
 # Target rules for targets named __idf_main
 
 # Build rule for target.
@@ -1755,6 +1768,7 @@ help:
 	@echo "... uf2-app"
 	@echo "... __idf_app_update"
 	@echo "... __idf_bootloader_support"
+	@echo "... __idf_console"
 	@echo "... __idf_cxx"
 	@echo "... __idf_efuse"
 	@echo "... __idf_esp_app_format"

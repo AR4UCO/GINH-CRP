@@ -58,8 +58,6 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_port.c.obj: /home/danchhu
   /home/danchhu/hal/esp-idf/components/esp_common/include/esp_err.h \
   /home/danchhu/hal/esp-idf/components/esp_common/include/esp_idf_version.h \
   /home/danchhu/hal/esp-idf/components/esp_common/include/esp_macros.h \
-  /home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/esp_private/uart_vfs.h \
-  /home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/uart_vfs.h \
   /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/esp_private/usb_serial_jtag_vfs.h \
   /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/usb_serial_jtag_vfs.h \
   /home/danchhu/hal/esp-idf/components/esp_hw_support/include/esp_cpu.h \
@@ -107,7 +105,6 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_port.c.obj: /home/danchhu
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/reset_reasons.h \
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/soc.h \
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/soc_caps.h \
-  /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/uart_pins.h \
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/register/soc/reg_base.h \
   /home/danchhu/hal/esp-idf/components/soc/include/soc/soc_caps_eval.h \
   /home/danchhu/hal/esp-idf/components/vfs/include/esp_vfs.h \
@@ -272,8 +269,6 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_vfs.c.obj: /home/danchhu/
   /home/danchhu/hal/esp-idf/components/esp_common/include/esp_err.h \
   /home/danchhu/hal/esp-idf/components/esp_common/include/esp_idf_version.h \
   /home/danchhu/hal/esp-idf/components/esp_common/include/esp_macros.h \
-  /home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/esp_private/uart_vfs.h \
-  /home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/uart_vfs.h \
   /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/esp_private/usb_serial_jtag_vfs.h \
   /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/usb_serial_jtag_vfs.h \
   /home/danchhu/hal/esp-idf/components/esp_hw_support/include/esp_cpu.h \
@@ -336,7 +331,6 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_vfs.c.obj: /home/danchhu/
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/reset_reasons.h \
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/soc.h \
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/soc_caps.h \
-  /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/uart_pins.h \
   /home/danchhu/hal/esp-idf/components/soc/esp32s3/register/soc/reg_base.h \
   /home/danchhu/hal/esp-idf/components/soc/include/soc/soc_caps_eval.h \
   /home/danchhu/hal/esp-idf/components/vfs/include/esp_private/nullfs.h \
@@ -390,6 +384,10 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_vfs.c.obj: /home/danchhu/
 
 /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/_default_fcntl.h:
 
+/home/danchhu/hal/esp-idf/components/esp_system/include/esp_private/startup_internal.h:
+
+/home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/errno.h:
+
 /home/danchhu/hal/esp-idf/components/esp_stdio/stdio_syscalls_simple.c:
 
 /home/danchhu/hal/esp-idf/components/esp_stdio/include/esp_system_console.h:
@@ -397,16 +395,6 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_vfs.c.obj: /home/danchhu/
 /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/esp_rom_caps.h:
 
 config/sdkconfig.h:
-
-/home/danchhu/hal/esp-idf/components/xtensa/include/xtensa_context.h:
-
-/home/danchhu/hal/esp-idf/components/xtensa/include/xtensa_config.h:
-
-/home/danchhu/hal/esp-idf/components/xtensa/include/xtensa_api.h:
-
-/home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/esp_private/uart_vfs.h:
-
-/home/danchhu/hal/esp-idf/components/xtensa/esp32s3/include/xtensa/config/core-isa.h:
 
 /home/danchhu/hal/esp-idf/components/esp_common/include/esp_err.h:
 
@@ -504,6 +492,10 @@ config/sdkconfig.h:
 
 /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/15.2.0/include/stddef.h:
 
+/home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/usb_serial_jtag_vfs.h:
+
+/home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/machine/_types.h:
+
 /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/types.h:
 
 /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/15.2.0/include/stdbool.h:
@@ -524,15 +516,11 @@ config/sdkconfig.h:
 
 /home/danchhu/hal/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/queue.h:
 
-/home/danchhu/hal/esp-idf/components/esp_system/include/esp_private/startup_internal.h:
+/home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/fcntl.h:
 
-/home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/errno.h:
+/home/danchhu/hal/esp-idf/components/esp_system/include/esp_private/crosscore_int.h:
 
-/home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/uart_vfs.h:
-
-/home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/machine/_types.h:
-
-/home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/usb_serial_jtag_vfs.h:
+/home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/esp_private/usb_serial_jtag_vfs.h:
 
 /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/limits.h:
 
@@ -568,11 +556,7 @@ config/sdkconfig.h:
 
 /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/picolibc.h:
 
-/home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/fcntl.h:
-
-/home/danchhu/hal/esp-idf/components/esp_system/include/esp_private/crosscore_int.h:
-
-/home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/esp_private/usb_serial_jtag_vfs.h:
+/home/danchhu/hal/esp-idf/components/xtensa/include/xtensa_context.h:
 
 /home/danchhu/hal/esp-idf/components/esp_hw_support/include/esp_intr_types.h:
 
@@ -589,6 +573,8 @@ config/sdkconfig.h:
 /home/danchhu/hal/esp-idf/components/esp_libc/platform_include/stdio.h:
 
 /home/danchhu/hal/esp-idf/components/esp_libc/platform_include/sys/lock.h:
+
+/home/danchhu/hal/esp-idf/components/xtensa/include/xtensa_api.h:
 
 /home/danchhu/hal/esp-idf/components/log/include/esp_private/log_attr.h:
 
@@ -676,12 +662,14 @@ config/sdkconfig.h:
 
 /home/danchhu/hal/esp-idf/components/vfs/include/esp_vfs.h:
 
-/home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/uart_pins.h:
-
 /home/danchhu/hal/esp-idf/components/vfs/include/esp_vfs_ops.h:
+
+/home/danchhu/hal/esp-idf/components/xtensa/esp32s3/include/xtensa/config/core-isa.h:
 
 /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/15.2.0/include/float.h:
 
 /home/danchhu/hal/esp-idf/components/xtensa/esp32s3/include/xtensa/config/core.h:
 
 /home/danchhu/hal/esp-idf/components/xtensa/esp32s3/include/xtensa/config/extreg.h:
+
+/home/danchhu/hal/esp-idf/components/xtensa/include/xtensa_config.h:

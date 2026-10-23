@@ -1,3 +1,4 @@
+source "/home/danchhu/hal/esp-idf/components/console/Kconfig"
 source "/home/danchhu/hal/esp-idf/components/efuse/Kconfig"
 source "/home/danchhu/hal/esp-idf/components/esp_coex/Kconfig"
 source "/home/danchhu/hal/esp-idf/components/esp_common/Kconfig"

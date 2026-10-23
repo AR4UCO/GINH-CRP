@@ -1,0 +1,173 @@
+Command: make -j 18 all
+-- Minimal build - ON
+-- Building ESP-IDF components for target esp32s3
+-- KCONFIG_REPORT_VERBOSITY not set, using default
+-- Project sdkconfig file /home/danchhu/hal/espnow/hello_world/sdkconfig
+-- Compiler supported targets: xtensa-esp-elf
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- App "hello_world" version: f16fa25-dirty
+-- Setting up mbedtls configuration
+-- Linkage type is PUBLIC
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_hal_wdt/esp32s3/rom.wdt.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_system/ld/esp32s3/memory.ld.in
+--   -> Preprocessing .in script: /home/danchhu/hal/esp-idf/components/esp_system/ld/esp32s3/memory.ld.in
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_system/ld/esp32s3/sections.ld.in
+--   -> Preprocessing .in script: /home/danchhu/hal/esp-idf/components/esp_system/ld/esp32s3/sections.ld.in
+--   -> Applying ldgen processing: /home/danchhu/hal/espnow/hello_world/build/esp-idf/esp_system/ld/sections.ld.in
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.api.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.bt_funcs.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.libgcc.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.version.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_master.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_50.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_smp.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_dtm.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_test.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_scan.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.libc.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/soc/esp32s3/ld/esp32s3.peripherals.ld
+-- Adding linker script /home/danchhu/hal/esp-idf/components/esp_hal_regi2c/esp32s3/rom.regi2c.ld
+-- Components: app_update bootloader bootloader_support cxx efuse esp_app_format esp_blockdev esp_bootloader_format esp_coex esp_common esp_driver_dma esp_driver_gpio esp_driver_uart esp_driver_usb_serial_jtag esp_event esp_hal_ana_conv esp_hal_clock esp_hal_dma esp_hal_gpio esp_hal_gpspi esp_hal_mspi esp_hal_pmu esp_hal_regi2c esp_hal_rtc_timer esp_hal_security esp_hal_systimer esp_hal_timg esp_hal_touch_sens esp_hal_uart esp_hal_usb esp_hal_wdt esp_hw_support esp_libc esp_mm esp_netif esp_netif_stack esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_security esp_stdio esp_system esp_timer esp_usb_cdc_rom_console esp_wifi esptool_py freertos hal heap log lwip main mbedtls nvs_flash nvs_sec_provider partition_table pthread soc spi_flash vfs wpa_supplicant xtensa
+-- Component paths: /home/danchhu/hal/esp-idf/components/app_update /home/danchhu/hal/esp-idf/components/bootloader /home/danchhu/hal/esp-idf/components/bootloader_support /home/danchhu/hal/esp-idf/components/cxx /home/danchhu/hal/esp-idf/components/efuse /home/danchhu/hal/esp-idf/components/esp_app_format /home/danchhu/hal/esp-idf/components/esp_blockdev /home/danchhu/hal/esp-idf/components/esp_bootloader_format /home/danchhu/hal/esp-idf/components/esp_coex /home/danchhu/hal/esp-idf/components/esp_common /home/danchhu/hal/esp-idf/components/esp_driver_dma /home/danchhu/hal/esp-idf/components/esp_driver_gpio /home/danchhu/hal/esp-idf/components/esp_driver_uart /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag /home/danchhu/hal/esp-idf/components/esp_event /home/danchhu/hal/esp-idf/components/esp_hal_ana_conv /home/danchhu/hal/esp-idf/components/esp_hal_clock /home/danchhu/hal/esp-idf/components/esp_hal_dma /home/danchhu/hal/esp-idf/components/esp_hal_gpio /home/danchhu/hal/esp-idf/components/esp_hal_gpspi /home/danchhu/hal/esp-idf/components/esp_hal_mspi /home/danchhu/hal/esp-idf/components/esp_hal_pmu /home/danchhu/hal/esp-idf/components/esp_hal_regi2c /home/danchhu/hal/esp-idf/components/esp_hal_rtc_timer /home/danchhu/hal/esp-idf/components/esp_hal_security /home/danchhu/hal/esp-idf/components/esp_hal_systimer /home/danchhu/hal/esp-idf/components/esp_hal_timg /home/danchhu/hal/esp-idf/components/esp_hal_touch_sens /home/danchhu/hal/esp-idf/components/esp_hal_uart /home/danchhu/hal/esp-idf/components/esp_hal_usb /home/danchhu/hal/esp-idf/components/esp_hal_wdt /home/danchhu/hal/esp-idf/components/esp_hw_support /home/danchhu/hal/esp-idf/components/esp_libc /home/danchhu/hal/esp-idf/components/esp_mm /home/danchhu/hal/esp-idf/components/esp_netif /home/danchhu/hal/esp-idf/components/esp_netif_stack /home/danchhu/hal/esp-idf/components/esp_partition /home/danchhu/hal/esp-idf/components/esp_phy /home/danchhu/hal/esp-idf/components/esp_pm /home/danchhu/hal/esp-idf/components/esp_psram /home/danchhu/hal/esp-idf/components/esp_ringbuf /home/danchhu/hal/esp-idf/components/esp_rom /home/danchhu/hal/esp-idf/components/esp_security /home/danchhu/hal/esp-idf/components/esp_stdio /home/danchhu/hal/esp-idf/components/esp_system /home/danchhu/hal/esp-idf/components/esp_timer /home/danchhu/hal/esp-idf/components/esp_usb_cdc_rom_console /home/danchhu/hal/esp-idf/components/esp_wifi /home/danchhu/hal/esp-idf/components/esptool_py /home/danchhu/hal/esp-idf/components/freertos /home/danchhu/hal/esp-idf/components/hal /home/danchhu/hal/esp-idf/components/heap /home/danchhu/hal/esp-idf/components/log /home/danchhu/hal/esp-idf/components/lwip /home/danchhu/hal/espnow/hello_world/main /home/danchhu/hal/esp-idf/components/mbedtls /home/danchhu/hal/esp-idf/components/nvs_flash /home/danchhu/hal/esp-idf/components/nvs_sec_provider /home/danchhu/hal/esp-idf/components/partition_table /home/danchhu/hal/esp-idf/components/pthread /home/danchhu/hal/esp-idf/components/soc /home/danchhu/hal/esp-idf/components/spi_flash /home/danchhu/hal/esp-idf/components/vfs /home/danchhu/hal/esp-idf/components/wpa_supplicant /home/danchhu/hal/esp-idf/components/xtensa
+-- Configuring done (12.5s)
+-- Generating done (1.0s)
+-- Build files have been written to: /home/danchhu/hal/espnow/hello_world/build
+[  0%] Built target sections_ld_in_preprocess
+[  0%] Built target custom_bundle
+[  0%] Built target partition_table_bin
+[  0%] Built target _project_elf_src
+[  0%] Built target memory_ld_in_preprocess
+[  0%] Performing build step for 'bootloader'
+[  2%] Built target __idf_esp_wifi
+[  3%] Built target __idf_esp_coex
+[  0%] Built target bootloader_memory_ld_in_preprocess
+[  1%] Built target bootloader_sections_ld_in_preprocess
+[  2%] Built target _project_elf_src
+[  8%] Built target __idf_log
+[ 15%] Built target __idf_esp_rom
+[ 16%] Built target __idf_esp_common
+[ 13%] Built target __idf_wpa_supplicant
+[ 23%] Built target __idf_esp_hw_support
+[ 14%] Built target __idf_esp_netif
+[ 24%] Built target __idf_esp_system
+[ 25%] Built target __idf_esp_hal_systimer
+[ 31%] Built target __idf_efuse
+[ 46%] Built target __idf_bootloader_support
+[ 26%] Built target __idf_lwip
+[ 50%] Built target __idf_esp_security
+[ 51%] Built target __idf_esp_hal_security
+[ 27%] Built target __idf_vfs
+[ 55%] Built target __idf_esp_hal_ana_conv
+[ 27%] Built target __idf_esp_driver_usb_serial_jtag
+[ 57%] Built target __idf_esp_hal_wdt
+[ 28%] Built target __idf_esp_driver_uart
+[ 59%] Built target __idf_esp_hal_timg
+[ 28%] Built target __idf_esp_psram
+[ 60%] Built target __idf_micro-ecc
+[ 29%] Built target __idf_esp_ringbuf
+[ 61%] Built target __idf_esp_bootloader_format
+[ 30%] Built target __idf_esp_phy
+[ 62%] Built target __idf_spi_flash
+[ 63%] Built target __idf_esp_hal_mspi
+[ 32%] Built target __idf_nvs_flash
+[ 65%] Built target __idf_esp_hal_clock
+[ 32%] Built target __idf_nvs_sec_provider
+[ 69%] Built target __idf_esp_hal_gpspi
+[ 33%] Built target __idf_esp_event
+[ 71%] Built target __idf_esp_hal_dma
+[ 33%] Built target __idf_cxx
+[ 74%] Built target __idf_esp_hal_uart
+[ 34%] Built target __idf_pthread
+[ 76%] Built target __idf_esp_hal_pmu
+[ 80%] Built target __idf_esp_hal_usb
+[ 37%] Built target __idf_esp_libc
+[ 85%] Built target __idf_esp_hal_gpio
+[ 39%] Built target __idf_freertos
+[ 89%] Built target __idf_hal
+[ 94%] Built target __idf_soc
+[ 46%] Built target __idf_esp_hw_support
+[ 96%] Built target __idf_xtensa
+[ 46%] Built target __idf_esp_hal_touch_sens
+[ 97%] Built target __idf_main
+[ 46%] Built target __idf_esp_hal_pmu
+[ 98%] Built target bootloader.elf
+[100%] Built target gen_bootloader_binary
+[ 47%] Built target __idf_esp_hal_usb
+[100%] Built target gen_project_binary
+[ 47%] Built target __idf_esp_hal_gpio
+[ 48%] Built target __idf_soc
+Bootloader binary size 0x50b0 bytes. 0x2f50 bytes (37%) free.
+[ 49%] Built target __idf_heap
+[100%] Built target bootloader_check_size
+[100%] Built target app
+[ 50%] Built target __idf_log
+[ 50%] No install step for 'bootloader'
+[ 51%] Built target __idf_hal
+[ 51%] Completed 'bootloader'
+[ 52%] Built target __idf_esp_rom
+[ 53%] Built target bootloader
+[ 53%] Built target __idf_esp_common
+[ 58%] Built target __idf_esp_system
+[ 61%] Built target __idf_spi_flash
+[ 63%] Built target __idf_bootloader_support
+[ 64%] Built target __idf_esp_hal_ana_conv
+[ 64%] Built target __idf_esp_hal_wdt
+[ 65%] Built target everest
+[ 66%] Built target p256-m
+[ 72%] Built target builtin
+[ 73%] Built target pqcp
+[ 74%] Built target extras
+[ 74%] Built target platform
+[ 75%] Built target utilities
+[ 80%] Built target tfpsacrypto
+[ 83%] Built target mbedtls
+[ 85%] Built target mbedx509
+[ 86%] Built target __idf_mbedtls
+[ 87%] Built target __idf_esp_driver_dma
+[ 88%] Built target __idf_esp_mm
+[ 88%] Built target __idf_esp_pm
+[ 89%] Built target __idf_esp_hal_uart
+[ 89%] Built target __idf_esp_driver_gpio
+[ 90%] Built target __idf_esp_security
+[ 91%] Built target __idf_esp_timer
+[ 91%] Built target __idf_esp_hal_systimer
+[ 92%] Built target __idf_esp_hal_timg
+[ 94%] Built target __idf_efuse
+[ 95%] Built target __idf_esp_partition
+[ 95%] Built target __idf_app_update
+[ 95%] Built target __idf_esp_bootloader_format
+[ 95%] Building C object esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj
+[ 95%] Linking C static library libesp_app_format.a
+[ 95%] Built target __idf_esp_app_format
+[ 96%] Built target __idf_esp_hal_security
+[ 97%] Built target __idf_esp_hal_mspi
+[ 97%] Built target __idf_esp_hal_clock
+[ 98%] Built target __idf_esp_hal_gpspi
+[ 99%] Built target __idf_esp_hal_dma
+[ 99%] Built target __idf_esp_stdio
+[100%] Built target __idf_xtensa
+[100%] Built target __idf_main
+[100%] Generating esp-idf/esp_system/ld/sections.ld
+Skipping linker script generation, section names unchanged
+[100%] Built target __ldgen_output_sections.ld
+[100%] Linking CXX executable hello_world.elf
+[100%] Built target hello_world.elf
+[100%] Generating binary image from built executable
+esptool v5.6.0
+Creating ESP32-S3 image...
+Merged 3 ELF sections.
+Successfully created ESP32-S3 image.
+Generated /home/danchhu/hal/espnow/hello_world/build/hello_world.bin
+[100%] Built target gen_hello_world_binary
+[100%] Built target gen_project_binary
+hello_world.bin binary size 0xb9880 bytes. Smallest app partition is 0x100000 bytes. 0x46780 bytes (28%) free.
+[100%] Built target app_check_size
+[100%] Built target app

@@ -123,4 +123,6 @@
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/wpa_supplicant/libwpa_supplicant.a
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/esp_coex/libesp_coex.a
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/esp_wifi/libesp_wifi.a
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/libconsole.a
 /home/danchhu/hal/espnow/hello_world/build/esp-idf/main/libmain.a
+/home/danchhu/hal/espnow/hello_world/build/esp-idf/console/libconsole.a

@@ -51,6 +51,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/danchhu/hal/esp-idf/components/bt/esp_ble_mesh/lib/lib/.git"
   "/home/danchhu/hal/esp-idf/components/bt/host/nimble/nimble/.git"
   "/home/danchhu/hal/esp-idf/components/cmock/CMock/.git"
+  "/home/danchhu/hal/esp-idf/components/console/CMakeLists.txt"
   "/home/danchhu/hal/esp-idf/components/cxx/CMakeLists.txt"
   "/home/danchhu/hal/esp-idf/components/efuse/CMakeLists.txt"
   "/home/danchhu/hal/esp-idf/components/efuse/esp32s3/sources.cmake"
@@ -399,6 +400,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "esp-idf/esp_coex/CMakeFiles/CMakeDirectoryInformation.cmake"
   "esp-idf/esp_wifi/CMakeFiles/CMakeDirectoryInformation.cmake"
   "esp-idf/esp_wifi/remote/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "esp-idf/console/CMakeFiles/CMakeDirectoryInformation.cmake"
   "esp-idf/main/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -519,5 +521,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/DependInfo.cmake"
   "esp-idf/esp_coex/CMakeFiles/__idf_esp_coex.dir/DependInfo.cmake"
   "esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/DependInfo.cmake"
+  "esp-idf/console/CMakeFiles/__idf_console.dir/DependInfo.cmake"
   "esp-idf/main/CMakeFiles/__idf_main.dir/DependInfo.cmake"
   )

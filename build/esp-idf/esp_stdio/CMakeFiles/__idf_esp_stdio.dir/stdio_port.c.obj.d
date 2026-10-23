@@ -31,7 +31,6 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_port.c.obj: \
  /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/assert.h \
  /home/danchhu/hal/esp-idf/components/esp_common/include/esp_compiler.h \
  /home/danchhu/hal/esp-idf/components/esp_stdio/include/esp_stdio_cli_config.h \
- /home/danchhu/hal/esp-idf/components/soc/esp32s3/include/soc/uart_pins.h \
  /home/danchhu/hal/esp-idf/components/vfs/include/esp_vfs_common.h \
  /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/esp_private/usb_serial_jtag_vfs.h \
  /home/danchhu/hal/esp-idf/components/vfs/include/esp_vfs.h \
@@ -132,6 +131,4 @@ esp-idf/esp_stdio/CMakeFiles/__idf_esp_stdio.dir/stdio_port.c.obj: \
  /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/strings.h \
  /home/danchhu/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/string.h \
  /home/danchhu/hal/esp-idf/components/vfs/include/esp_vfs_ops.h \
- /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/usb_serial_jtag_vfs.h \
- /home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/esp_private/uart_vfs.h \
- /home/danchhu/hal/esp-idf/components/esp_driver_uart/include/driver/uart_vfs.h
+ /home/danchhu/hal/esp-idf/components/esp_driver_usb_serial_jtag/include/driver/usb_serial_jtag_vfs.h
