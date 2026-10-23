@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 
 #include "freertos/FreeRTOS.h"
@@ -254,6 +255,32 @@ void display_text(int x, int y, const char *str, bool invert)
     }
     for (int i = 0; i < len; i++) {
         draw_char(x + i * DISPLAY_FONT_W, y, str[i], !invert);
+    }
+}
+
+//https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases
+void display_line(int x0, int x1, int y0, int y1){
+    int dx = abs(x1 - x0);
+    int sx = x0 < x1 ? 1 : -1;
+    int dy = -abs(y1 - y0);
+    int sy = y0 < y1 ? 1 : -1;
+    int error = dx + dy;
+
+    for(;;){
+        display_set_pixel(x0, y0, true);
+        int e2 = 2 * error;
+        if (e2 >= dy){
+            if (x0 == x1)
+                break;
+            error += dy;
+            x0 += sx;
+        }
+        if (e2 <= dx){
+            if (y0 == y1)
+                break;
+            error += dx;
+            y0 += sy;
+        }
     }
 }
 
