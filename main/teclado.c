@@ -30,42 +30,12 @@ static int min(int a, int b){
     return a > b ? b : a;
 }
 
-static void draw_text_buf(int x, int y, const char *s, int n, bool invert)
-{
-    char buf[QUARTER_WIDTH / DISPLAY_FONT_W + 1];
-    memcpy(buf, s, n);
-    buf[n] = '\0';
-    display_text(x, y, buf, invert);
+static void draw_text_centered(int x,int y,const char *s){
+    display_text(x-strlen(s)*DISPLAY_FONT_W/2, y-DISPLAY_FONT_H/2, s, false);
 }
 
-static void draw_quadrant(int quadrant, const char *s, int n)
-{
-    if (n <= 0) {
-        return;
-    }
 
-    const int right = quadrant == 1 || quadrant == 2;
-    const int bottom = quadrant >= 2;
-    const int x = right ? QUARTER_WIDTH : 0;
-    const int y = bottom ? QUARTER_HEIGHT : 0;
-    const int w = n * DISPLAY_FONT_W;
-
-    draw_text_buf(x + (QUARTER_WIDTH - w) / 2, y + (QUARTER_HEIGHT - DISPLAY_FONT_H) / 2, s, n, false);
-}
-
-static int quarter_offset(int range, int i)
-{
-    const int base = range / 4;
-    const int extra = range % 4;
-    return i * base + (i < extra ? i : extra);
-}
-
-static int quarter_size_at(int range, int i)
-{
-    return range / 4 + (i < range % 4 ? 1 : 0);
-}
-
-static void draw_screen(const char *charset, int lo, int hi)
+static void draw_screen(const char choices[4][9])
 {
     display_clear();
 
@@ -81,17 +51,17 @@ static void draw_screen(const char *charset, int lo, int hi)
         if (c == ' ') {
             c = '_';
         }
-        draw_text_buf(KEYBOARD_WIDTH + (SIDEBAR_WIDTH - DISPLAY_FONT_W) / 2, 4 + i * DISPLAY_FONT_H, &c, 1, false);
+        const char s[2] = {c, '\0'};
+        draw_text_centered(KEYBOARD_WIDTH + SIDEBAR_WIDTH / 2, 8 + i * DISPLAY_FONT_H, s);
     }
 
-    const int range = hi - lo + 1;
-    if (range == 1) {
-        draw_text_buf((KEYBOARD_WIDTH - DISPLAY_FONT_W) / 2, (BOARD_LCD_HEIGHT - DISPLAY_FONT_H) / 2, &charset[lo], 1, true);
+    if (choices[1][0]=='\0') {
+        draw_text_centered(KEYBOARD_WIDTH/2, BOARD_LCD_HEIGHT/2, choices[0]);
     } else {
-        const int quadrants = min(4, range);
-        for (int i = 0; i < quadrants; i++) {
-            draw_quadrant(i, &charset[lo + quarter_offset(range, i)], quarter_size_at(range, i));
-        }
+        draw_text_centered(KEYBOARD_WIDTH/4, BOARD_LCD_HEIGHT/4, choices[0]);
+        draw_text_centered(KEYBOARD_WIDTH*3/4, BOARD_LCD_HEIGHT/4, choices[1]);
+        draw_text_centered(KEYBOARD_WIDTH/4, BOARD_LCD_HEIGHT*3/4, choices[3]);
+        draw_text_centered(KEYBOARD_WIDTH*3/4, BOARD_LCD_HEIGHT*3/4, choices[2]);
     }
 
     display_flush();
@@ -149,10 +119,28 @@ static int joystick_dir_pressed(uint32_t new_press)
     return -1;
 }
 
+static void split_charset(const char *charset, char choices[4][9]){
+    const int len = strlen(charset);
+    const int base = len / 4;
+    const int extra = len % 4;
+    int offset = 0;
+    for (int i = 0; i < 4; i++){
+        const int newlen = base + (i < extra ? 1 : 0);
+        memcpy(choices[i], charset + offset, newlen);
+        choices[i][newlen] = '\0';
+        offset += newlen;
+    }
+}
+
 char read_char(void){
-    const char *charset = charsets[current_charset_id];
-    int lo = 0;
-    int hi = (int)strlen(charset) - 1;
+    // menos eficiente que usando indices high y low pero el str es chico 
+    // y el código quedaba horrible sino
+
+    char current[33];
+    char choices[4][9];
+    strcpy(current, charsets[current_charset_id]);
+    split_charset(current, choices);
+
     uint32_t prev_pressed = buttons_read();
 
     while (true) {
@@ -162,9 +150,8 @@ char read_char(void){
 
         if (new_press & (1u << BTN_KEY1)) {
             current_charset_id = (current_charset_id + 1) % 4;
-            charset = charsets[current_charset_id];
-            lo = 0;
-            hi = (int)strlen(charset) - 1;
+            strcpy(current, charsets[current_charset_id]);
+            split_charset(current, choices);
             continue;
         }
         if (new_press & (1u << BTN_KEY2)) {
@@ -177,23 +164,23 @@ char read_char(void){
             return '\n';
         }
 
-        const int range = hi - lo + 1;
+        const int range = strlen(current);
         if (range == 1) {
-            draw_screen(charset, lo, hi);
+            draw_screen(choices);
             vTaskDelay(pdMS_TO_TICKS(200));
-            return charset[lo];
+            return current[0];
         }
 
-        const int quadrants = min(4,range);
+        const int quadrants = min(4, range);
         const int selected = joystick_dir_pressed(new_press);
 
-        if (selected >= 0 && selected < quadrants) {
-            lo = lo + quarter_offset(range, selected);
-            hi = lo + quarter_size_at(range, selected) - 1;
+        if (selected < 0 || selected >= quadrants) {
+            draw_screen(choices);
+            vTaskDelay(pdMS_TO_TICKS(20));
             continue;
         }
 
-        draw_screen(charset, lo, hi);
-        vTaskDelay(pdMS_TO_TICKS(20));
+        strcpy(current, choices[selected]);
+        split_charset(current, choices);
     }
 }
