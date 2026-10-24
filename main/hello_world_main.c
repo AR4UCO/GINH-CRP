@@ -27,6 +27,8 @@
 #include "display.h"
 #include "buttons.h"
 #include "teclado.h"
+#include "inbox.h"
+#include "peer_pick.h"
 
 static const char *TAG = "ESP-NOW-E2EE";
 
@@ -81,17 +83,28 @@ static void on_secure_data(const uint8_t mac[6], const uint8_t *payload, size_t 
         snprintf(name, sizeof(name), MACSTR, MAC2STR(mac));
 
     ESP_LOGI(TAG, "MSG de %s: %.*s", name, (int)len, payload);
+
+    // El teclado (tarea de UI) lo muestra como aviso tipo pager
+    inbox_post(name, (const char *)payload, len);
 }
 
 // ---------- Teclado radial -> backend cifrado ----------
-// readline() bloquea dibujando el teclado hasta Enter (KEY4).
-// Al volver, el texto se cifra y se manda a todos los peers con sesión.
+// 1. peer_pick(): elige destinatario (si hay una sola sesión, la usa sola).
+// 2. readline(): teclado en pantalla hasta Enter (KEY4).
+// 3. e2ee_send(): cifra y manda SOLO a ese peer.
 static void teclado_task(void *arg)
 {
     (void)arg;
 
     for (;;)
     {
+        uint8_t dest[6];
+        if (!peer_pick(dest))
+        {
+            vTaskDelay(pdMS_TO_TICKS(200));
+            continue;
+        }
+
         char *msg = readline();
         if (!msg)
         {
@@ -108,36 +121,29 @@ static void teclado_task(void *arg)
         if (len > E2EE_MAX_PAYLOAD)
             len = E2EE_MAX_PAYLOAD;
 
-        int enviados = 0;
-        if (len > 0)
-        {
-            int n = e2ee_established_count();
-            for (int i = 0; i < n; i++)
-            {
-                e2ee_peer_info_t p;
-                if (e2ee_get_peer_info(i, &p) &&
-                    e2ee_send(p.mac, (const uint8_t *)msg, len) == ESP_OK)
-                    enviados++;
-            }
-            ESP_LOGI(TAG, "Teclado: \"%.*s\" -> %d peer(s)", (int)len, msg, enviados);
-        }
+        esp_err_t err = e2ee_send(dest, (const uint8_t *)msg, len);
 
-        // Feedback breve antes de volver al teclado
+        char nick[32] = "?";
+        if (!e2ee_lookup_name(dest, nick, sizeof(nick)))
+            snprintf(nick, sizeof(nick), MACSTR, MAC2STR(dest));
+
         display_clear();
-        if (enviados > 0)
+        if (err == ESP_OK)
         {
             char line[32];
-            snprintf(line, sizeof(line), "Enviado a %d", enviados);
+            snprintf(line, sizeof(line), "Enviado a %.10s", nick);
             display_text(0, 0, line, false);
         }
         else
         {
-            display_text(0, 0, "Sin sesion", false);
-            display_text(0, 10, "segura", false);
+            display_text(0, 0, "Error al enviar", false);
+            display_text(0, 10, "reintentar", false);
         }
         display_flush();
-        vTaskDelay(pdMS_TO_TICKS(700));
 
+        ESP_LOGI(TAG, "Teclado -> %s: \"%.*s\" (%s)",
+                 nick, (int)len, msg, esp_err_to_name(err));
+        vTaskDelay(pdMS_TO_TICKS(700));
         free(msg);
     }
 }
@@ -179,6 +185,7 @@ void app_main(void)
     // La tarea se crea después de e2ee_init: los paquetes que lleguen
     // mientras tanto simplemente esperan en la cola.
     s_rx_queue = xQueueCreate(8, sizeof(rx_event_t));
+    inbox_init();
 
     init_espnow();
 

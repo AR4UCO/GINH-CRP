@@ -108,6 +108,18 @@ I (xxx) ESP-NOW-E2EE: MSG de ESP-4A1B: hola desde la placa A
 Los HELLO periódicos son silenciosos cuando ya hay sesión: solo se ven
 mensajes, huellas y errores de autenticación/replay.
 
+## UI con teclado radial y pantalla
+
+- **Enviar:** antes de abrir el teclado se elige destinatario. Si hay una
+  sola sesión segura se elige sola; si hay varias, aparece la lista
+  (joystick arriba/abajo, **KEY4** confirma, **KEY3** cancela). El envío es
+  **unicast a ese peer**, no broadcast.
+- **Recibir:** el último mensaje recibido aparece como aviso durante 4 s
+  (o hasta que se presione una tecla): remitente + texto envuelto a 21
+  columnas. Después vuelve solo al teclado.
+- El aviso usa `inbox.c` (buzón de un solo mensaje, thread-safe) y no dibuja
+  desde la tarea cripto; el teclado los consume y dibuja.
+
 ## Integración con la UI (pantalla)
 
 La capa E2EE es **headless**: no sabe nada de pantalla ni de consola. Para la
