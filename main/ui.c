@@ -417,18 +417,12 @@ static void pintar(void)
     switch (s_estado) {
         case UI_IDLE:
             display_text(0, 0, "[ MOD: SNIFFER ]", false);
-            snprintf(fila, sizeof(fila), "NICK %s P:%d", nick, pares);
-            display_text(0, 10, fila, false);
-            if (hay_par) {
-                /* 21 columnas: el nick (15) + la huella entera no caben juntos,
-                   asi que en IDLE se muestra un recorte y en CONFIG la huella
-                   completa, que es donde uno la verifica contra la otra placa. */
-                snprintf(fila, sizeof(fila), "PAR %.8s %02X%02X-%02X", par.name,
-                         par.fingerprint[0], par.fingerprint[1], par.fingerprint[2]);
-            } else {
-                snprintf(fila, sizeof(fila), "SIN PAR AUN");
-            }
-            display_text(0, 22, fila, false);
+            display_text(0, 10, "---------------------", false);
+            display_text(0, 24, " ESCUCHANDO RED...", false);
+            
+            snprintf(fila, sizeof(fila), " SESIONES: %d", pares);
+            display_text(0, 40, fila, false);
+            
             if (s_ultimo_visto) {
                 display_text(0, 30, s_ultimo_de, true);
                 /* y=40 y no 42: display_text ocupa y..y+7, y el pie esta en 48.
@@ -436,28 +430,20 @@ static void pintar(void)
                 pintar_envuelto(0, 40, 1, s_ultimo_txt);
             }
             /* Dos lineas: con 21 columnas (fonte de 6 px sobre 128) no entran las
-               dos etiquetas juntas y se cortaba la ultima letra. No meto 'Hola' junto
-               a Hello: en SNIFFER SW1 manda el HELLO, y el usuario pidio que SW3 diga
-               config porque es a donde te lleva. */
-            pie_pair(48, "[SW1]Hello", "[SW2]Ver");
-            display_text(0, 56, "[SW3]Config", false);
+               dos etiquetas juntas y se cortaba la ultima letra. */
+            pie_pair(48, "[SW1]Par", "[SW2]Ver");
             break;
 
         case UI_CONFIG:
             display_text(0, 0, "--- CONFIGURACION ---", false);
-            snprintf(fila, sizeof(fila), " NICK: %s", nick);
-            display_text(0, 10, fila, false);
-            snprintf(fila, sizeof(fila), MACSTR, MAC2STR(mac));
+            snprintf(fila, sizeof(fila), " ALIAS: %s", nick);
             display_text(0, 20, fila, false);
-            if (hay_par) {
-                snprintf(fila, sizeof(fila), "HUELLA %02X%02X-%02X%02X", par.fingerprint[0],
-                         par.fingerprint[1], par.fingerprint[2], par.fingerprint[3]);
-                display_text(0, 30, fila, false);
-            } else {
-                display_text(0, 30, "sin par seguro", false);
-            }
-            pie_pair(48, "[SW1]Nick", "[SW2]Par");
-            display_text(0, 56, "[SW3]Mensaje", false);
+            
+            snprintf(fila, sizeof(fila), MACSTR, MAC2STR(mac));
+            display_text(0, 36, " MAC:", false);
+            display_text(0, 44, fila, false);
+            
+            pie_pair(56, "[SW1]Edit", "");
             break;
 
         case UI_COMPOSE: {
@@ -504,16 +490,12 @@ static void pintar(void)
                          E2EE_MAX_PAYLOAD, a_quien, grabando ? " GRAB" : "");
             }
             display_text(0, 40, fila, false);
-            /* Lo que pidio el usuario (08:1x): arriba las dos acciones de escritura
-               y ABAJO 'Config' (a donde te lleva SW3) y 'Enviar'. Con [SWx] entre
-               corchetes 'Config' + 'Enviar' no caben en 21 columnas, por eso el pie
-               va alineado a los bordes. */
+            
             pie_pair(48, "[SW1]Teclear", "[SW2]Voz");
-            /* El usuario quiere leer 'Enviar' completo (no 'Envia'). Con corchetes en
-               las dos etiquetas serian 22 caracteres y la pantalla tiene 21 columnas
-               (fonte 5x7 + 1 px = 6 px por caracter sobre 128), asi que aca se le
-               sacan los corchetes a la etiqueta de la derecha y la palabra queda entera. */
-            pie_pair(56, "[SW3]Cfg", "[SW4]Enviar");
+            /* Al usar 'Borra' (10 chars) en vez de 'Borrar', y '[SW4]Enviar' (11 chars), 
+               suman exactamente 21 caracteres, por lo que entra perfecto en la pantalla 
+               junto con los corchetes. */
+            pie_pair(56, "[SW3]Borra", "[SW4]Enviar");
             break;
         }
 
@@ -561,14 +543,8 @@ static void pintar(void)
                 display_fill_rect(0, 40, (ancho * nivel) / 100, 4, true);
             }
             /* Pie en dos pares alineados a los bordes (lo mismo que las otras
-               pantallas). Before: '[SW2]Borra [SW4]Envia' iba concatenate y, con 21
-               columnas utiles, la ultima letra se cortaba. Acercate si la barra no
-               sube es el unico consejo que sirve y va en la linea de arriba. */
-            /* Con 21 columnas justas: 'Hablar'(11)+'Borrar'(11) = 22 NO entran
-               juntos (se comia la 'r'). La instruccion ya dice 'listo para
-               hablar' arriba, asi que el par usa 'Voz' (como en MENSAJE) y deja
-               el hueco: Voz(5)+Borrar(11). Atras(10)+'Enviar'(11) llenan la otra. */
-            pie_pair(48, grabando ? "[SW1]Para" : "[SW1]Voz", "[SW2]Borrar");
+               pantallas). */
+            pie_pair(48, grabando ? "[SW1]Para" : "[SW1]Hablar", "[SW2]Borra");
             pie_pair(56, "[SW3]Atras", "[SW4]Enviar");
             break;
         }
@@ -765,49 +741,19 @@ void ui_run(void)
             }
         }
 
-        if (nuevas & (1u << BTN_KEY3)) {
-            /* SW3 ya NO cicla las 4 pantallas (por eso el dictado aparecfa solo).
-               Es contextual y el pie de cada pantalla dice a donde va:
-               sniffer -> config, config -> mensaje, mensaje -> atras (config),
-               dictado -> atras (mensaje). */
-            switch (s_estado) {
-                case UI_IDLE:
-                    s_estado = UI_CONFIG;
-                    break;
-                case UI_CONFIG:
-                    s_estado = UI_COMPOSE;
-                    break;
-                case UI_COMPOSE:
-                    s_estado = UI_CONFIG;
-                    break;
-                case UI_DICTADO:
-                    /* DICTADO es sub-pantalla de COMPOSE: 'Atras' vuelve a COMPOSE,
-                       no a CONFIG (y asi SW2 'Voz' sigue siendo la entrada). */
-                    s_estado = UI_COMPOSE;
-                    break;
-                default:
-                    s_estado = UI_IDLE;
-                    break;
-            }
-        } else if (nuevas & (1u << BTN_LEFT)) {
+        /* --- NAVEGACIÓN GLOBAL POR JOYSTICK --- */
+        if (nuevas & (1u << BTN_LEFT)) {
             s_estado = ciclar_main(s_estado, -1);
         } else if (nuevas & (1u << BTN_RIGHT)) {
             s_estado = ciclar_main(s_estado, +1);
-        } else if (nuevas & (1u << BTN_KEY1)) {
+        } 
+        
+        /* --- ACCIÓN SW1 --- */
+        else if (nuevas & (1u << BTN_KEY1)) {
             switch (s_estado) {
                 case UI_IDLE: {
                     static const uint8_t bcast[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-                    /* Que hace SW1 aca: manda el HELLO, que es el unico paquete que
-                       viaja SIN cifrar (broadcast). Lleva mi clave publica X25519, mi
-                       nick y un nonce. La otra placa contesta, las dos derivan el
-                       secreto compartido y ahi nace la sesion: sin sesion, e2ee_send()
-                       devuelve ESP_ERR_NOT_FOUND y NINGUN mensaje puede salir. Por eso
-                       el Hello existe: es 'presentate y armemos la clave'. */
                     e2ee_send_hello(bcast);
-                    /* Y el aviso tiene que mostrar el resultado, porque si la sesion ya
-                       estaba armada no cambia nada en pantalla y parece que el boton
-                       no hace nada. La huella es identica en las dos placas: es lo que
-                       se puede mostrar en la demo para probar que hablan cifrado. */
                     const int n = e2ee_established_count();
                     e2ee_peer_info_t p;
                     if (n > 0 && e2ee_get_peer_info(0, &p)) {
@@ -823,8 +769,6 @@ void ui_run(void)
                     break;
                 }
                 case UI_CONFIG: {
-                    /* Se copia el borrador antes: readline_seed() lo recorre sin
-                       candado y la PC lo puede estar pisando por el REPL. */
                     char semilla[BORRADOR_MAX + 1];
                     ui_borrador_copia(semilla, sizeof(semilla));
                     char *nuevo = readline_seed(semilla);
@@ -853,60 +797,55 @@ void ui_run(void)
                 default:
                     break;
             }
-        } else if (s_estado == UI_IDLE && (nuevas & (1u << BTN_KEY2))) {
-            /* 'Ver' del pie: vuelve a abrir el ultimo mensaje recibido, con su
-               paginador. Sin esto, un mensaje largo se leia solo mientras duraba
-               el aviso (4 s) y despues no habia forma de ver el resto. */
-            if (s_ultimo_visto && s_ultimo_txt[0]) {
-                mostrar_mensaje(s_ultimo_de, s_ultimo_txt);
-                prev = buttons_read();
-            } else {
-                snprintf(s_aviso, sizeof(s_aviso), "sin mensajes") ;
-                s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(2500);
-            }
-        } else if (nuevas & (1u << BTN_KEY2)) {
-            /* SW2 es la accion secundaria, y significa algo distinto en cada
-               pantalla (lo que dice el pie de pagina):
-               CONFIG   -> elegir el destinatario con el peer_pick del grupo
-               COMPOSE  -> abre/cierra el dictado sin salir del teclado
-               DICTADO  -> limpia el borrador (por si la PC transcribio basura) */
-            if (s_estado == UI_CONFIG) {
-                uint8_t elegido[6];
-                if (peer_pick(elegido)) {
-                    candado();
-                    memcpy(s_destino, elegido, 6);
-                    s_tiene_destino = true;
-                    destrabo();
-                    char nombre[E2EE_NICK_MAX + 1] = "?";
-                    e2ee_lookup_name(elegido, nombre, sizeof(nombre));
-                    snprintf(s_aviso, sizeof(s_aviso), "PARA %.12s", nombre);
+        } 
+        
+        /* --- ACCIÓN SW2 --- */
+        else if (nuevas & (1u << BTN_KEY2)) {
+            if (s_estado == UI_IDLE) {
+                if (s_ultimo_visto && s_ultimo_txt[0]) {
+                    mostrar_mensaje(s_ultimo_de, s_ultimo_txt);
+                    prev = buttons_read();
                 } else {
-                    snprintf(s_aviso, sizeof(s_aviso), "sin par seguro");
+                    snprintf(s_aviso, sizeof(s_aviso), "sin mensajes") ;
+                    s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(2500);
                 }
-                s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(AVISO_MS);
-                prev = buttons_read(); /* la tecla que cerro la eleccion no cuenta */
+            } else if (s_estado == UI_CONFIG) {
+                /* Botón libre ahora, no hace nada porque quitamos peer_pick de aquí */
             } else if (s_estado == UI_COMPOSE) {
-                /* MEDIDO con los dedos del usuario (08:0x): SW2 ('Voz') entraba a la
-                   pantalla de dictado PERO ademas llamaba a dictado_alternar(), o sea
-                   arrancaba a grabar sin que nadie lo pidiera; en pantalla solo se veia
-                   'GRAB' a la derecha y parecia que no hacia nada. SW2 ahora ONLY abre
-                   la pantalla; el micro se arranca con SW1, que es lo que dice el pie. */
                 s_estado = UI_DICTADO;
                 snprintf(s_aviso, sizeof(s_aviso), "sw1 para hablar");
                 s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(AVISO_MS);
-                /* Antes solo aparecia "GRAB" a la derecha y no se entendia nada:
-                   avisamos que la toma se cierra sola y que falta la PC escuchando
-                   (sin el listener de transcribir_vivo.py no hay texto de vuelta). */
                 snprintf(s_aviso, sizeof(s_aviso), dictado_grabando() ? "HABLA (4 s)" : "procesando..");
                 s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(AVISO_MS);
             } else if (s_estado == UI_DICTADO) {
                 ui_borrador_limpiar();
             }
-        } else if (nuevas & (1u << BTN_CENTER)) {
-            /* Apretar el joystick hojea el texto largo en las pantallas donde se
-               escribe (lo que falta del dictado o del mensaje). En el teclado radial
-               el joystick apretado es Enter; aca esta libre y es la unica tecla que
-               no tiene etiqueta en el pie. */
+        } 
+
+        /* --- ACCIÓN SW3 --- */
+        else if (nuevas & (1u << BTN_KEY3)) {
+            if (s_estado == UI_COMPOSE) {
+                // Borrar todo el mensaje
+                ui_borrador_limpiar();
+                snprintf(s_aviso, sizeof(s_aviso), "borrado");
+                s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(1500);
+            } else if (s_estado == UI_DICTADO) {
+                // Atrás
+                s_estado = UI_COMPOSE;
+            }
+        }
+
+        /* --- ACCIÓN SW4 --- */
+        else if (nuevas & (1u << BTN_KEY4)) {
+            /* SW4 = Enviar (tanto desde COMPOSE como desde DICTADO) */
+            if (s_estado == UI_COMPOSE || s_estado == UI_DICTADO) {
+                ui_enviar_borrador(NULL, 0);
+            }
+        }
+
+        /* --- ACCIÓN JOYSTICK CENTER --- */
+        else if (nuevas & (1u << BTN_CENTER)) {
+            /* Apretar el joystick hojea el texto largo en las pantallas donde se escribe */
             if (s_estado == UI_COMPOSE || s_estado == UI_DICTADO) {
                 if (s_texto_paginas > 1) {
                     s_texto_pagina = (s_texto_pagina + 1) % s_texto_paginas;
@@ -916,12 +855,6 @@ void ui_run(void)
                     snprintf(s_aviso, sizeof(s_aviso), "el texto entra entero");
                     s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(2500);
                 }
-            }
-        } else if (nuevas & (1u << BTN_KEY4)) {
-            /* SW4 = Enter (en el teclado radial tambien es Enter): manda el
-               borrador cifrado. Es la respuesta al TODO de esp_now_send. */
-            if (s_estado == UI_COMPOSE || s_estado == UI_DICTADO) {
-                ui_enviar_borrador(NULL, 0);
             }
         }
 
