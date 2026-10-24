@@ -513,7 +513,7 @@ static void pintar(void)
                las dos etiquetas serian 22 caracteres y la pantalla tiene 21 columnas
                (fonte 5x7 + 1 px = 6 px por caracter sobre 128), asi que aca se le
                sacan los corchetes a la etiqueta de la derecha y la palabra queda entera. */
-            pie_pair(56, "[SW3]Config", "SW4 Enviar");
+            pie_pair(56, "[SW3]Cfg", "[SW4]Enviar");
             break;
         }
 
@@ -565,7 +565,7 @@ static void pintar(void)
                columnas utiles, la ultima letra se cortaba. Acercate si la barra no
                sube es el unico consejo que sirve y va en la linea de arriba. */
             pie_pair(48, grabando ? "[SW1]Para" : "[SW1]Hablar", "[SW2]Borra");
-            pie_pair(56, "[SW3]Atras", "[SW4]Enviar");
+            pie_pair(56, "[SW3]Atr", "[SW4]Enviar");
             break;
         }
 
