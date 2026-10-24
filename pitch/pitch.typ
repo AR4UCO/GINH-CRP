@@ -126,7 +126,7 @@
       [
         #set par(leading: 1.15em)
         #text(size: 21pt, fill: paper)[
-          Dos placas que se mandan mensajes encriptados por ESP-NOW.
+          Red de placas que se mandan mensajes por ESP-NOW encriptadas.
         ]
       ],
       [#align(right + top)[#image("art/kiwi-paper.png", height: 84mm)]],
@@ -144,10 +144,9 @@
     columns: (1fr, 1fr), column-gutter: 16mm, align: left + top,
     [
       #grid(columns: 1, row-gutter: 6mm, align: left + top,
-        bullet("Punto a punto, 2.4 GHz.",
-          cuerpo: "sin AP, sin router, sin DNS"),
-        bullet("One-to-many y many-to-many."),
-        bullet("No depende de redes externas."),
+        bullet("Mensajería punto a punto",
+          cuerpo: "sin AP ni router ni wifi"),
+        bullet("\"One-to-many y many-to-many\""),
       )
       #v(6mm)
       #micro("github.com/espressif/esp-now", c: muted)
@@ -156,12 +155,9 @@
       #kicker("COMUNICACION E2EE")
       #v(5mm)
       #grid(columns: 1, row-gutter: 6mm, align: left + top,
-        bullet("Clave pública / privada.",
-          cuerpo: "X25519 + AES-256-GCM; la privada no sale de la placa"),
-        bullet("Por dirección MAC.",
-          cuerpo: "el par se presenta con un HELLO de 50 B en claro"),
-        bullet("Huella de 8 hex en CONFIG.",
-          cuerpo: "las dos placas tienen que ver el mismo número"),
+        bullet("Encriptado con llave pública y privada",
+          cuerpo: "X25519 + AES-256-GCM"),
+        bullet("Comunicación por dirección MAC"),
       )
     ],
   )
@@ -171,16 +167,14 @@
 // ============================================================
 // 3 · El menú
 // ============================================================
-#slide("02 - El menú", "Tres pantallas principales", [
+#slide("02 - Menú", "Capturas", [
   #grid(
     columns: (1fr, 104mm), column-gutter: 12mm, align: left + top,
     [
       #grid(columns: 1, row-gutter: 6.4mm, align: left + top,
-        bullet("SNIFFER", cuerpo: "quién es tu par · sw1 HELLO · sw2 ver el último mensaje"),
+        bullet("SNIFFER", cuerpo: "quién es tu par"),
         bullet("CONFIG", cuerpo: "nickname editable, par y huella de la sesión"),
-        bullet("MENSAJE", cuerpo: "el borrador: sw1 teclado · sw2 voz · sw3 CONFIG · sw4 enviar"),
-        bullet("El pie de página dice qué hace cada botón."),
-        bullet("El joystick cicla entre las tres pantallas."),
+        bullet("MENSAJE", cuerpo: "mensaje borrador"),
       )
     ],
     [
@@ -196,7 +190,7 @@
          #v(1.2mm)#micro("mensaje recibido", c: muted)],
       )
       #v(3mm)
-      #micro("capturas del framebuffer real, no mockups", c: muted)
+      #micro("capturas del framebuffer", c: muted)
     ],
   )
 ])
@@ -210,8 +204,7 @@
     columns: (1fr, 92mm), column-gutter: 12mm, align: left + top,
     [
       #text(size: 13.5pt, fill: ink)[
-        Cada dirección de la palanca elige un bloque de letras; si el bloque
-        queda en una sola letra, se escribe sola.
+        Cada dirección de la palanca elige un bloque de letras, recursivamente hasta que queda una sola.
       ]
       #v(7mm)
       #grid(columns: (18mm, 1fr), column-gutter: 4mm, row-gutter: 3mm,
@@ -219,28 +212,23 @@
         text(font: MONO, size: 10.5pt, weight: "bold", fill: goldink)[joystick]
         , text(size: 12pt, fill: ink)[elige el cuadrante],
         text(font: MONO, size: 10.5pt, weight: "bold", fill: goldink)[sw1]
-        , text(size: 12pt, fill: ink)[capa: minúsculas, MAYÚSCULAS, 123, símbolos],
+        , text(size: 12pt, fill: ink)[cambiar capa: minúsculas, mayusculas, numeros, símbolos],
         text(font: MONO, size: 10.5pt, weight: "bold", fill: goldink)[sw2]
         , text(size: 12pt, fill: ink)[espacio],
         text(font: MONO, size: 10.5pt, weight: "bold", fill: goldink)[sw3]
         , text(size: 12pt, fill: ink)[borrar],
         text(font: MONO, size: 10.5pt, weight: "bold", fill: goldink)[sw4]
-        , text(size: 12pt, fill: ink)[enviar · vacío: volver],
+        , text(size: 12pt, fill: ink)[enviar/volver],
       )
       #v(9mm)
-      #grid(columns: (1fr, 1fr), column-gutter: 8mm, align: left + top,
-        bullet("Cuatro capas sobre los mismos cuadrantes."),
-        bullet("26 letras en 4 bloques."),
-      )
     ],
     [
       #teclado()
       #v(3mm)
-      #micro("la capa de minúsculas", c: muted)
+      #micro("minúsculas", c: muted)
       #v(7mm)
       #image("image/placa-limpia.png", width: 58mm)
       #v(1.5mm)
-      #micro("la placa del kit", c: muted)
     ],
   )
 ])
@@ -251,21 +239,11 @@
 // ============================================================
 #slide("04 - Extra", "Voz a texto", [
   #grid(
-    columns: (40mm, 1fr, 64mm), column-gutter: 14mm, align: left + top,
-    [
-      #grid(columns: 1, row-gutter: 9mm, align: left + top,
-        dato("742 MB", "el modelo", sub: "ASR 0,6 B · q8_0"),
-        dato("< 1 s", "de hablar al texto en el OLED"),
-      )
-    ],
+    columns: (1fr, 64mm), column-gutter: 14mm, align: left + top,
     [
       #grid(columns: 1, row-gutter: 6.4mm, align: left + top,
-        bullet("El modelo corre en un servidor externo.",
-          cuerpo: "el audio baja por USB desde la placa"),
-        bullet("El texto entra al mismo borrador",
-          cuerpo: "que el teclado y viaja cifrado igual"),
-        bullet("Se reemplaza por una SBC.",
-          cuerpo: "todo local, sin cable ni red"),
+        bullet("Si se conecta a una computadora para correr el modelo"),
+        bullet("Se podría reemplazar por una SBC (pesa solo 742 MB!)"),
       )
     ],
     [
@@ -285,9 +263,8 @@
     columns: (1fr, 1fr), column-gutter: 16mm, align: left + top,
     [
       #grid(columns: 1, row-gutter: 6mm, align: left + top,
-        bullet("Buena parte del firmware está pseudoprogramada por modelos."),
+        bullet("Parte del firmware está pseudoprogramada por modelos."),
         bullet("El diseño, la medición y las pruebas van por nuestra cuenta."),
-        bullet("Todo lo que decimos estuvo medido en las placas."),
       )
     ],
     [
