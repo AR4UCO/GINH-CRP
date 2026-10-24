@@ -223,9 +223,9 @@
       #v(9mm)
     ],
     [
-      #teclado()
+      #image("oled/A-6-teclado.png", width: 88mm)
       #v(3mm)
-      #micro("minúsculas", c: muted)
+      #micro("captura real: la capa de minusculas", c: muted)
       #v(7mm)
       #image("image/placa-limpia.png", width: 58mm)
       #v(1.5mm)
