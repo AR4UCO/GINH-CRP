@@ -137,11 +137,31 @@
 #pagebreak()
 
 // ============================================================
+// 1.5  Portada
+// ============================================================
+#slide("GHOST IN THE HAL - FCEyN - UBA - 23 Y 24 OCT 2026",
+  "Brainstorming",
+  [
+    #grid(
+      columns: (1fr), column-gutter: 12mm, align: (left + horizon, left + top),
+      [
+        #set par(leading: 1.15em)
+        #text(size: 21pt, fill: paper)[
+          
+        ]
+      ],
+    )
+  ],
+  oscuro: true,
+)
+#pagebreak()
+
+// ============================================================
 // 2 · ESP-NOW + E2EE
 // ============================================================
-#slide("01 - Radio y cifrado", "Protocolo ESP-NOW", [
+#slide("01 - Radio", "Protocolo ESP-NOW", [
   #grid(
-    columns: (1fr, 1fr), column-gutter: 16mm, align: left + top,
+    columns: (1fr), column-gutter: 16mm, align: left + top,
     [
       #grid(columns: 1, row-gutter: 6mm, align: left + top,
         bullet("Mensajería punto a punto",
@@ -150,15 +170,6 @@
       )
       #v(6mm)
       #micro("github.com/espressif/esp-now", c: muted)
-    ],
-    [
-      #kicker("COMUNICACION E2EE")
-      #v(5mm)
-      #grid(columns: 1, row-gutter: 6mm, align: left + top,
-        bullet("Encriptado con llave pública y privada",
-          cuerpo: "X25519 + AES-256-GCM"),
-        bullet("Comunicación por dirección MAC"),
-      )
     ],
   )
 ])
@@ -171,6 +182,16 @@
   #grid(
     columns: (1fr, 104mm), column-gutter: 12mm, align: left + top,
     [
+          [
+      #kicker("COMUNICACION E2EE")
+      #v(5mm)
+      #grid(columns: 1, row-gutter: 6mm, align: left + top,
+        bullet("Encriptado con llave pública y privada",
+          cuerpo: "X25519 + AES-256-GCM"),
+        bullet("Comunicación por dirección MAC"),
+      )
+    ],
+
       #grid(columns: 1, row-gutter: 6.4mm, align: left + top,
         bullet("SNIFFER", cuerpo: "quién es tu par"),
         bullet("CONFIG", cuerpo: "nickname editable, par y huella de la sesión"),
