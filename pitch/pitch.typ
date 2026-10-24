@@ -136,25 +136,6 @@
 )
 #pagebreak()
 
-// ============================================================
-// 1.5  Portada
-// ============================================================
-#slide("GHOST IN THE HAL - FCEyN - UBA - 23 Y 24 OCT 2026",
-  "Brainstorming",
-  [
-    #grid(
-      columns: (1fr), column-gutter: 12mm, align: (left + horizon, left + top),
-      [
-        #set par(leading: 1.15em)
-        #text(size: 21pt, fill: paper)[
-          
-        ]
-      ],
-    )
-  ],
-  oscuro: true,
-)
-#pagebreak()
 
 // ============================================================
 // 2 · ESP-NOW + E2EE
@@ -175,10 +156,29 @@
 ])
 #pagebreak()
 
+
+// ============================================================
+// 2 · ESP-NOW + E2EE
+// ============================================================
+#slide("2.5 - Brainstorming", "Brainstorming", [
+  #grid(
+    columns: (1fr), column-gutter: 16mm, align: left + top,
+    [
+      #grid(columns: 1, row-gutter: 6mm, align: left + top,
+        bullet("Nos gustaba el protocolo ESP-NOW y como evita el wifi"),
+        bullet("Basamos el proyecto en iterar sobre eso"),
+      )
+      #v(6mm)
+      #micro("github.com/espressif/esp-now", c: muted)
+    ],
+  )
+])
+#pagebreak()
+
 // ============================================================
 // 3 · El menú
 // ============================================================
-#slide("02 - Menú", "Capturas", [
+#slide("02 - Menú y E2EE", "E2EE y Capturas", [
   #grid(
     columns: (1fr, 104mm), column-gutter: 12mm, align: left + top,
     [
