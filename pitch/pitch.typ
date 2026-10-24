@@ -184,7 +184,7 @@
          #v(1.2mm)#micro("SNIFFER", c: muted)],
         [#image("oled/A-2-config.png", width: 50mm)
          #v(1.2mm)#micro("CONFIG", c: muted)],
-        [#image("oled/A-3-msj-largo.png", width: 50mm)
+        [#image("oled/A-3-compose.png", width: 50mm)
          #v(1.2mm)#micro("MENSAJE", c: muted)],
         [#image("oled/B-5c-pager-pagina2.png", width: 50mm)
          #v(1.2mm)#micro("mensaje recibido", c: muted)],
