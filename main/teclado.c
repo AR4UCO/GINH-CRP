@@ -198,7 +198,9 @@ static int s_giro_teclado = -1;
 static int giro_teclado(void)
 {
     if (s_giro_teclado < 0) {
-        int32_t v = 3;
+        int32_t v = 0;  /* medido 24/10 11:38: con el mapa de board.h (UP=9)
+                       UP debe caer en el cuadrante 0 (arriba-izq,
+                       abcdefg): el default anterior (3) corria un cuadrante. */
         nvs_handle_t h;
         if (nvs_open("app", NVS_READONLY, &h) == ESP_OK) {
             nvs_get_i32(h, "kbd.giro", &v);
