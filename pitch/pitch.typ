@@ -205,7 +205,7 @@
          #v(1.2mm)#micro("SNIFFER", c: muted)],
         [#image("oled/A-2-config.png", width: 50mm)
          #v(1.2mm)#micro("CONFIG", c: muted)],
-        [#image("oled/A-3-msj-largo.png", width: 50mm)
+        [#image("oled/A-3-compose.png", width: 50mm)
          #v(1.2mm)#micro("MENSAJE", c: muted)],
         [#image("oled/B-5c-pager-pagina2.png", width: 50mm)
          #v(1.2mm)#micro("mensaje recibido", c: muted)],
@@ -244,9 +244,9 @@
       #v(9mm)
     ],
     [
-      #teclado()
+      #image("oled/A-6-teclado.png", width: 88mm)
       #v(3mm)
-      #micro("minúsculas", c: muted)
+      #micro("captura real: la capa de minusculas", c: muted)
       #v(7mm)
       #image("image/placa-limpia.png", width: 58mm)
       #v(1.5mm)
