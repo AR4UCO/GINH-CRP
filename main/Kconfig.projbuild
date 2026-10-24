@@ -1,0 +1,82 @@
+menu "Grabador kiwi"
+
+    config HACK_SPEAKER_VOLUME
+        int "Speaker volume (percent of full scale)"
+        range 1 100
+        default 25
+        help
+            Peak amplitude of generated tones. The MAX98357A is loud even at
+            low values, keep it low when testing at a desk.
+
+    config HACK_DISPLAY_ROTATE_180
+        bool "Rotate display by 180 degrees"
+        default n
+        help
+            Enable if the text on the OLED appears upside down.
+
+    config HACK_RECORD_SECONDS
+        int "Segundos maximos de grabacion"
+        range 1 25
+        default 10
+        help
+            Techo de la toma que arranca con KEY1 (la toma se puede cerrar antes
+            con KEY1). Cada segundo son 32 KB de RAM: con la PSRAM apagada en
+            esta board no conviene pasar de ~10 s.
+
+    config HACK_LIVE_TRANSCRIPCION
+        bool "Modo en vivo (chunks de audio mientras se graba)"
+        default n
+        help
+            Experimental. Con 'y' el audio sale por el puerto en chunks de ~19 ms
+            mientras se graba y el texto va apareciendo en vivo.Todavia pierde
+            bytes por el puerto, asi que esta apagado por defecto.
+
+            Con 'n' (recomendado hoy) KEY1 abre el micro, KEY1 lo cierra, y se
+            drena la toma COMPLETA con el protocolo con crc32 que esta probado
+            (tools/transcribir_vivo.py la manda al nodo ASR de una sola vez).
+
+    config HACK_MIC_GAIN
+        int "Ganancia digital del micro (1 = sin ganancia)"
+        range 1 8
+        default 1
+        help
+            Multiplica el PCM de la toma (con saturacion) antes de mandarlo al
+            nodo ASR. Medido en la habitacion silenciosa: pico -42 dBFS y el nodo
+            responde rejected/no_speech (esta bien: no hay habla). Si hablando el
+            pico sigue por debajo de ~-26 dBFS, subir a 2 o 3. No mucho mas: el
+            nodo tiene VAD y amplificar el ruido de fondo hace que INVENTE texto.
+
+    config HACK_JOYSTICK_PASOS
+        int "Giro del joystick (en pasos de 90 grados, horario)"
+        range 0 3
+        default 0
+        help
+            El joystick de la kiwi board viene fisicamente girado y el grupo dej
+            DOS mapas distintos en board.h que difieren exactamente en un cuarto
+            de vuelta: graficos/teclado usan UP=9 (ese es el pinout que nosotros
+            medimos andando en kiwi-record), crypto usa UP=10. Con 0 se usa el
+            mapa de board.h; con 1 el de crypto; 2 y 3 son los casos restantes.
+
+            Para saber cual es el bueno no hay otra que apretar y mirar: el
+            comando 'botones' del REPL loguea 'presion: UP (io 9)' y con eso se
+            elige el numero sin tocar el pinout.
+
+    config HACK_MAX_ESCUCHA_SECONDS
+        int "Segundos maximos de escucha continua"
+        range 5 110
+        default 30
+        depends on HACK_LIVE_TRANSCRIPCION
+        help
+            Corta la toma sola si nadie volvio a apretar KEY1. El nodo ASR cierra
+            la sesion a los 120 s de audio bufferizado (buffer_overflow), por eso
+            el techo esta por debajo.
+
+    config HACK_AUTO_RECORD_MS
+        int "Auto grabar cada N ms (0 = desactivado)"
+        default 0
+        help
+            Modo kiosk / trigger sin manos: ademas del disparo por KEY1,
+            graba solo cada N milisegundos. Util para probar el enlace con la
+            PC sin depender de apretar el boton. 0 deja el comportamiento normal.
+
+endmenu
