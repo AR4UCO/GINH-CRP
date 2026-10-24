@@ -136,12 +136,13 @@
 )
 #pagebreak()
 
+
 // ============================================================
 // 2 · ESP-NOW + E2EE
 // ============================================================
-#slide("01 - Radio y cifrado", "Protocolo ESP-NOW", [
+#slide("01 - Radio", "Protocolo ESP-NOW", [
   #grid(
-    columns: (1fr, 1fr), column-gutter: 16mm, align: left + top,
+    columns: (1fr), column-gutter: 16mm, align: left + top,
     [
       #grid(columns: 1, row-gutter: 6mm, align: left + top,
         bullet("Mensajería punto a punto",
@@ -151,14 +152,24 @@
       #v(6mm)
       #micro("github.com/espressif/esp-now", c: muted)
     ],
+  )
+])
+#pagebreak()
+
+
+// ============================================================
+// 2 · ESP-NOW + E2EE
+// ============================================================
+#slide("2.5 - Brainstorming", "Brainstorming", [
+  #grid(
+    columns: (1fr), column-gutter: 16mm, align: left + top,
     [
-      #kicker("COMUNICACION E2EE")
-      #v(5mm)
       #grid(columns: 1, row-gutter: 6mm, align: left + top,
-        bullet("Encriptado con llave pública y privada",
-          cuerpo: "X25519 + AES-256-GCM"),
-        bullet("Comunicación por dirección MAC"),
+        bullet("Nos gustaba el protocolo ESP-NOW y como evita el wifi"),
+        bullet("Basamos el proyecto en iterar sobre eso"),
       )
+      #v(6mm)
+      #micro("github.com/espressif/esp-now", c: muted)
     ],
   )
 ])
@@ -167,10 +178,20 @@
 // ============================================================
 // 3 · El menú
 // ============================================================
-#slide("02 - Menú", "Capturas", [
+#slide("02 - Menú y E2EE", "E2EE y Capturas", [
   #grid(
     columns: (1fr, 104mm), column-gutter: 12mm, align: left + top,
     [
+          [
+      #kicker("COMUNICACION E2EE")
+      #v(5mm)
+      #grid(columns: 1, row-gutter: 6mm, align: left + top,
+        bullet("Encriptado con llave pública y privada",
+          cuerpo: "X25519 + AES-256-GCM"),
+        bullet("Comunicación por dirección MAC"),
+      )
+    ],
+
       #grid(columns: 1, row-gutter: 6.4mm, align: left + top,
         bullet("SNIFFER", cuerpo: "quién es tu par"),
         bullet("CONFIG", cuerpo: "nickname editable, par y huella de la sesión"),
