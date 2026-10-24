@@ -1,53 +1,157 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-H21 | ESP32-H4 | ESP32-P4 | ESP32-S2 | ESP32-S3 | ESP32-S31 | Linux |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | --------- | -------- | --------- | -------- | -------- | -------- | -------- | --------- | ----- |
+# ESP-NOW E2EE — Cifrado extremo a extremo para ESP32-S3
 
-# Hello World Example
+Mismo firmware para todas las placas. Las placas se auto-descubren por
+broadcast y establecen **canales cifrados punto a punto** sin ninguna clave
+grabada en el firmware.
 
-Starts a FreeRTOS task to print "Hello World".
+## Cómo funciona
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+1. Al arrancar, cada placa genera un **par de claves X25519 efímero** (solo
+   vive en RAM) y lo anuncia por broadcast en un mensaje `HELLO`.
+2. Cada **par de placas** hace ECDH y deriva su propia **clave de sesión
+   AES-256-GCM** (ConcatKDF-SHA-256). TOFU: se acepta la primera clave
+   pública vista de cada MAC.
+3. Todo el tráfico de datos va cifrado y autenticado con AES-256-GCM, con
+   contador monotónico contra replay. AAD = MAC del emisor, así nadie puede
+   reetiquetar un mensaje como de otra placa.
+4. Al establecerse cada sesión se imprime una **huella** por el puerto serie
+   (idéntica en ambas placas): comparándola se detecta un man-in-the-middle
+   durante el emparejado.
 
-## How to use example
-
-Follow detailed instructions provided specifically for this example.
-
-Select the instructions depending on Espressif chip installed on your development board:
-
-- [ESP32 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html)
-- [ESP32-S2 Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/index.html)
-
-
-## Example folder contents
-
-The project **hello_world** contains one source file in C language [hello_world_main.c](main/hello_world_main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt` files that provide set of directives and instructions describing the project's source files and targets (executable, library, or both).
-
-Below is short explanation of remaining files in the project folder.
+## Formato de paquetes (capa de aplicación sobre ESP-NOW)
 
 ```
-├── CMakeLists.txt
-├── pytest_hello_world.py      Python script used for automated testing
-├── main
-│   ├── CMakeLists.txt
-│   └── hello_world_main.c
-└── README.md                  This is the file you are currently reading
+HELLO:  [ver=2][tipo=1][pub X25519:32][boot_nonce:8][nick:16]   (sin cifrar)
+DATA:   [ver=2][tipo=2][nonce:12][AES-256-GCM(seq:8 || payload)][tag:16]
+        nonce = salt_sesión:4 || seq:8  (bit de dirección en el salt)
 ```
 
-For more information on structure and contents of ESP-IDF projects, please refer to Section [Build System](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html) of the ESP-IDF Programming Guide.
+Propiedades: confidencialidad e integridad por par, secreto hacia adelante
+entre reinicios (claves efímeras), anti-replay, anti-suplantación de emisor.
 
-## Troubleshooting
+## Uso
 
-* Program upload failure
+```bash
+idf.py build
+idf.py -p /dev/ttyUSB0 flash monitor   # repetir en cada placa
+```
 
-    * Hardware connection is not correct: run `idf.py -p PORT monitor`, and reboot your board to see if there are any output logs.
-    * The baud rate for downloading is too high: lower your baud rate in the `menuconfig` menu, and try again.
+Al emparejarse, ambas placas muestran la misma huella (compárenla):
 
-## Technical support and feedback
+```
+I (xxx) E2EE: E2EE listo. Soy ESP-4A1B (24:ec:4a:11:22:33)
+I (xxx) E2EE: Sesión segura establecida con ESP-9C2D (48:ca:43:aa:bb:cc)
+I (xxx) E2EE: Huella del par 48:ca:43:aa:bb:cc: 7F3A91C2-04BE88D1
+```
 
-Please use the following feedback channels:
+### Conexión de la consola
 
-* For technical queries, go to the [esp32.com](https://esp32.com/) forum
-* For a feature request or bug report, create a [GitHub issue](https://github.com/espressif/esp-idf/issues)
+Este proyecto usa la consola **USB-Serial/JTAG nativa del ESP32-S3**
+(`CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y`): un solo cable USB al conector
+"USB" de la placa y aparece como `/dev/ttyACM0`, `/dev/ttyACM1`, etc.
 
-We will get back to you as soon as possible.
+```bash
+idf.py -p /dev/ttyACM0 flash monitor   # una placa
+idf.py -p /dev/ttyACM1 flash monitor   # la otra (en otra terminal)
+```
+
+Si en cambio usas el conector "UART" (puente CP2102/CH340), ese aparece como
+`/dev/ttyUSB0` y hay que volver a poner la consola en UART0:
+`idf.py menuconfig` → *Component config → ESP System Settings → Channel for
+console output* → **UART0** (GPIO43=TX, GPIO44=RX, 115200 8N1).
+
+### Mensajería interactiva (consola por USB/UART)
+
+Cada placa tiene un prompt `e2ee>`. Comandos:
+
+| Comando | Acción |
+|---|---|
+| `send <texto>` | Cifra y envía a **todos** los peers (un unicast por peer) |
+| `sendto <índice\|MAC\|nick> <texto>` | Envía a un peer concreto |
+| `peers` | Lista peers: nick, MAC y huella |
+| `nick [nuevo]` | Muestra o cambia tu nick (se guarda en NVS) |
+| `hello` | Re-anuncia por broadcast (fuerza descubrimiento) |
+| `whoami` | Muestra nick y MAC propios |
+| `free` | Muestra RAM libre |
+| `help` | Ayuda |
+
+### Nick / identidad
+
+El nick es una etiqueta elegida por el usuario, **independiente de la MAC**:
+se guarda en NVS (sobrevive reinicios) y viaja en cada HELLO. Cambiarlo
+re-anuncia el HELLO; los peers actualizan el nombre sin re-negociar claves.
+
+```
+e2ee> nick Ana
+Nick guardado en NVS y anunciado: Ana
+
+e2ee> sendto Beto hola
+-> Beto (48:ca:43:aa:bb:cc): hola
+```
+
+En la otra placa aparece `Nick actualizado de 24:ec:4a:...: Ana`.
+
+> Es un nombre, **no** una identidad criptográfica: cualquiera puede usar el
+> mismo nick. La autenticación de la sesión sigue siendo TOFU por MAC/clave.
+> El formato HELLO cambió (protocolo v2): **reflashear ambas placas**.
+
+Ejemplo de conversación entre las dos placas:
+
+```
+e2ee> send hola desde la placa A
+-> ESP-9C2D (48:ca:43:aa:bb:cc)
+```
+```
+I (xxx) ESP-NOW-E2EE: MSG de ESP-4A1B: hola desde la placa A
+```
+
+Los HELLO periódicos son silenciosos cuando ya hay sesión: solo se ven
+mensajes, huellas y errores de autenticación/replay.
+
+## UI con teclado radial y pantalla
+
+- **Enviar:** antes de abrir el teclado se elige destinatario. Si hay una
+  sola sesión segura se elige sola; si hay varias, aparece la lista
+  (joystick arriba/abajo, **KEY4** confirma, **KEY3** cancela). El envío es
+  **unicast a ese peer**, no broadcast.
+- **Recibir:** el último mensaje recibido aparece como aviso durante 4 s
+  (o hasta que se presione una tecla): remitente + texto envuelto a 21
+  columnas. Después vuelve solo al teclado.
+- El aviso usa `inbox.c` (buzón de un solo mensaje, thread-safe) y no dibuja
+  desde la tarea cripto; el teclado los consume y dibuja.
+
+## Integración con la UI (pantalla)
+
+La capa E2EE es **headless**: no sabe nada de pantalla ni de consola. Para la
+interfaz visual, lo que hay que consumir es:
+
+| Necesidad | API |
+|---|---|
+| Último mensaje recibido | callback `e2ee_set_rx_callback()` (corre en la tarea cripto: **encolar**, no dibujar) |
+| Lista de peers | `e2ee_get_peer_info(i, &p)` → `name`, `mac`, `fingerprint` |
+| Cantidad de sesiones | `e2ee_established_count()` |
+| Mi nick/MAC | `e2ee_get_self()` |
+| Enviar | `e2ee_send(mac, texto, len)` |
+| Cambiar nick | `e2ee_set_nick()` |
+| Descubrir | `e2ee_send_hello(BROADCAST)` |
+
+Regla de oro: **no llamar a LVGL/driver de pantalla desde el callback de
+recepción** (corre en la tarea cripto). Encolar el mensaje y dibujarlo desde
+la tarea de UI, como ya hace la consola con `ESP_LOGI`.
+
+## Límites (diseño de laboratorio)
+
+- Payload de aplicación: **212 bytes** por mensaje (`E2EE_MAX_PAYLOAD`).
+- Máx. **8 peers** simultáneos (`MAX_PEERS` en `e2ee.c`).
+- TOFU: la ventana de ataque MITM es solo durante el primer HELLO; verifiquen
+  la huella por serie si importa.
+- Un atacante puede forzar re-negociación (DoS) reenviando HELLOs viejos;
+  no obtiene ninguna clave, pero puede interrumpir el enlace.
+
+## Archivos
+
+| Archivo | Contenido |
+|---|---|
+| `main/e2ee.c` / `e2ee.h` | Protocolo: handshake X25519, KDF, AES-GCM, tabla de sesiones |
+| `main/cli.c` / `cli.h` | Consola interactiva: `send`, `sendto`, `peers`, `nick`, `hello`, `whoami` |
+| `main/hello_world_main.c` | App: WiFi/ESP-NOW, cola RX + tarea cripto, re-anuncio periódico |

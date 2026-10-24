@@ -8,6 +8,7 @@
 #include "board.h"
 #include "buttons.h"
 #include "display.h"
+#include "inbox.h"
 
 char letters[] = "abcdefghijklmnopqrstuvwxyz";
 char caps[] =    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -149,6 +150,44 @@ static int joystick_dir_pressed(uint32_t new_press)
     return -1;
 }
 
+/* Aviso de mensaje recibido: se muestra encima del teclado y vuelve
+ * solo a los 4 s o al presionar cualquier tecla. */
+#define MSG_COLS  21
+#define MSG_LINES 5
+
+static void show_incoming(const char *sender, const char *text)
+{
+    display_clear();
+    display_text(0, 0, "Mensaje de:", false);
+    display_text(0, 10, sender, true);
+
+    int y = 22;
+    int col = 0;
+    char line[MSG_COLS + 1];
+
+    for (const char *p = text; *p && y < 22 + MSG_LINES * DISPLAY_FONT_H; p++) {
+        line[col++] = *p;
+        if (col == MSG_COLS || p[1] == '\0') {
+            line[col] = '\0';
+            display_text(0, y, line, false);
+            y += DISPLAY_FONT_H;
+            col = 0;
+        }
+    }
+    display_flush();
+
+    uint32_t prev = buttons_read();
+    TickType_t start = xTaskGetTickCount();
+    while (xTaskGetTickCount() - start < pdMS_TO_TICKS(4000)) {
+        const uint32_t now = buttons_read();
+        if ((now & ~prev) != 0) {
+            break;
+        }
+        prev = now;
+        vTaskDelay(pdMS_TO_TICKS(20));
+    }
+}
+
 char read_char(void){
     const char *charset = charsets[current_charset_id];
     int lo = 0;
@@ -156,6 +195,15 @@ char read_char(void){
     uint32_t prev_pressed = buttons_read();
 
     while (true) {
+        char in_sender[INBOX_SENDER_MAX];
+        char in_text[INBOX_TEXT_MAX];
+        if (inbox_take(in_sender, sizeof(in_sender), in_text, sizeof(in_text))) {
+            show_incoming(in_sender, in_text);
+            prev_pressed = buttons_read(); // no inyectar la tecla que cierra el aviso
+            draw_screen(charset, lo, hi);
+            continue;
+        }
+
         const uint32_t pressed = buttons_read();
         const uint32_t new_press = pressed & ~prev_pressed;
         prev_pressed = pressed;
