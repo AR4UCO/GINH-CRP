@@ -47,8 +47,10 @@ static SemaphoreHandle_t s_lock;
 static char s_borrador[BORRADOR_MAX + 1];
 static ui_state_t s_estado = UI_IDLE;
 
-/* Aviso de un mensaje recibido: se guarda una copia para poder mostrarla en
-   IDLE despues (el inbox es de un solo mensaje y se limpia al tomarlo). */
+/* Ultimo mensaje recibido: se guarda SOLO para poder reabrirlo con SW2 "Ver".
+   No se dibuja permanente sobre IDLE: el aviso modal ya lo muestra y, al
+   cerrarlo, el home tiene que volver a verse (bug reportado: el mensaje quedaba
+   pisando la pantalla de inicio para siempre). */
 static char s_ultimo_de[INBOX_SENDER_MAX + 16];
 static char s_ultimo_txt[INBOX_TEXT_MAX];
 static bool s_ultimo_visto;
@@ -330,60 +332,6 @@ static int pintar_envuelto_desde(int x, int y, int filas, const char *p, int pag
     return ultima_pagina + 1;
 }
 
-/* Envuelve en hasta 'filas' lineas de UI_COLS y pinta las ultimas, cortando en
-   espacios para no partir palabras. */
-static void pintar_envuelto(int x, int y, int filas, const char *p)
-{
-    if (filas > 6) {
-        filas = 6; /* es el tamaño del anillo de abajo */
-    }
-    char linea[UI_COLS + 1];
-    /* Anillo con las ULTIMAS filas: lo que uno esta escribiendo o dictando esta
-       al final del borrador, y en una pantalla de 3 lineas mostrar el principio
-       es mostrar siempre lo mismo. Por eso la ventana es una cola. */
-    char ret[6][UI_COLS + 1];
-    int total = 0;
-
-    while (*p) {
-        int n = 0;
-        while (n < UI_COLS && p[n]) {
-            n++;
-        }
-        if (p[n]) {
-            int corte = n;
-            while (corte > 0 && p[corte] != ' ') {
-                corte--;
-            }
-            if (corte > 0) {
-                n = corte;
-            }
-        }
-        memcpy(linea, p, n);
-        linea[n] = '\0';
-        snprintf(ret[total % 6], sizeof(ret[0]), "%s", linea);
-        total++;
-        p += n;
-        while (*p == ' ') {
-            p++;
-        }
-    }
-
-    if (total == 0) {
-        return;
-    }
-    const int primera = (total > filas) ? total - filas : 0;
-    for (int i = primera; i < total; i++) {
-        char out[UI_COLS + 1];
-        if (i == primera && primera > 0) {
-            /* '..' avisa que hay texto mas arriba (el mensaje sigue). */
-            snprintf(out, sizeof(out), "..%.19s", ret[i % 6]);
-        } else {
-            snprintf(out, sizeof(out), "%s", ret[i % 6]);
-        }
-        display_text(x, y + (i - primera) * 10, out, false);
-    }
-}
-
 /* Pie de pagina en tira: primera etiqueta al margen izquierdo y la otra al
    derecho. Medido: la fonte 5x7 mas 1 px de espacio = 6 px por caracter, o sea
    21 columnas utiles (128/6); concatenate dos etiquetas de 11 y 11 se cortaba.
@@ -407,8 +355,6 @@ static void pintar(void)
     e2ee_get_self(mac, nick, sizeof(nick));
 
     const int pares = e2ee_established_count();
-    e2ee_peer_info_t par = {0};
-    const bool hay_par = e2ee_get_peer_info(0, &par);
     const bool grabando = dictado_grabando();
     const bool aviso_vivo = s_aviso[0] && xTaskGetTickCount() < s_aviso_hasta;
 
@@ -422,13 +368,10 @@ static void pintar(void)
             
             snprintf(fila, sizeof(fila), " SESIONES: %d", pares);
             display_text(0, 40, fila, false);
-            
-            if (s_ultimo_visto) {
-                display_text(0, 30, s_ultimo_de, true);
-                /* y=40 y no 42: display_text ocupa y..y+7, y el pie esta en 48.
-                   Con 42 la ultima linea del mensaje se comfa media etiqueta. */
-                pintar_envuelto(0, 40, 1, s_ultimo_txt);
-            }
+
+            /* El ultimo mensaje NO se pinta aca: el modal ya lo mostro y SW2
+               "Ver" lo reabre. Antes se dibujaba encima del home y quedaba para
+               siempre (s_ultimo_visto nunca volvia a false). */
             /* Dos lineas: con 21 columnas (fonte de 6 px sobre 128) no entran las
                dos etiquetas juntas y se cortaba la ultima letra. */
             pie_pair(48, "[SW1]Par", "[SW2]Ver");
@@ -713,6 +656,9 @@ void ui_run(void)
             s_ultimo_visto = true;
             mostrar_mensaje(s_ultimo_de, s_ultimo_txt);
             prev = buttons_read(); /* no tragarse la tecla que cerr el aviso */
+            /* El modal dibujo su propia pantalla: forzar el repintado del home
+               al volver, aunque el texto sea identico al anterior. */
+            firma_prev[0] = '\0';
         }
 
         /* 2) Texto que devolvio la PC (dictado): entra al borrador comun.
@@ -805,6 +751,7 @@ void ui_run(void)
                 if (s_ultimo_visto && s_ultimo_txt[0]) {
                     mostrar_mensaje(s_ultimo_de, s_ultimo_txt);
                     prev = buttons_read();
+                    firma_prev[0] = '\0'; /* volver a pintar el home */
                 } else {
                     snprintf(s_aviso, sizeof(s_aviso), "sin mensajes") ;
                     s_aviso_hasta = xTaskGetTickCount() + pdMS_TO_TICKS(2500);
