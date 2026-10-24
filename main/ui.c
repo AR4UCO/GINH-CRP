@@ -564,8 +564,12 @@ static void pintar(void)
                pantallas). Before: '[SW2]Borra [SW4]Envia' iba concatenate y, con 21
                columnas utiles, la ultima letra se cortaba. Acercate si la barra no
                sube es el unico consejo que sirve y va en la linea de arriba. */
-            pie_pair(48, grabando ? "[SW1]Para" : "[SW1]Hablar", "[SW2]Borra");
-            pie_pair(56, "[SW3]Atr", "[SW4]Enviar");
+            /* Con 21 columnas justas: 'Hablar'(11)+'Borrar'(11) = 22 NO entran
+               juntos (se comia la 'r'). La instruccion ya dice 'listo para
+               hablar' arriba, asi que el par usa 'Voz' (como en MENSAJE) y deja
+               el hueco: Voz(5)+Borrar(11). Atras(10)+'Enviar'(11) llenan la otra. */
+            pie_pair(48, grabando ? "[SW1]Para" : "[SW1]Voz", "[SW2]Borrar");
+            pie_pair(56, "[SW3]Atras", "[SW4]Enviar");
             break;
         }
 
